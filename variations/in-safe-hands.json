@@ -1,0 +1,92 @@
+{
+	"classLayout": "simple",
+	"title": "Page Title",
+	"components": {
+		"head": [{
+			"path": "templates/rubbon.htm",
+			"variation": {
+				"mainTag": "div"
+			}
+		}, {
+			"path": "templates/header.htm",
+			"variation": {
+				"mainTag": "header"
+			}
+		}],
+		"main" : [{
+			"path": "templates/additional-menu.htm",
+			"variation": {
+				"mainTag": "nav"
+			}
+		}, {
+			"path": "templates/title.htm",
+			"variation": {
+				"mainTag": "div"
+			}
+		}, {
+			"path": "templates/image-content.htm",
+			"variation": {
+				"mainTag": "article",
+				"content": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui explicabo consectetur eum rerum voluptatibus sunt adipisci quod, incidunt nemo amet, ut quae sit ipsa voluptas iusto facere. Reprehenderit, excepturi, placeat.</p>",
+				"image": {
+					"src": "./media/images/it-it/circle.png",
+					"alt": "Lorem Ipsum"
+				}
+			}
+		}, {
+			"path": "templates/image-list.htm",
+			"variation": {
+				"mainTag": "section"
+			}
+		}],
+		"overview" : [{
+			"path": "templates/overview.htm",
+			"variation": {
+				"mainTag": "section"
+			}
+		}],
+		"aside" : [{
+			"path": "templates/three-items.htm",
+			"variation": {
+				"mainTag": "aside",
+				"components": {
+					"item-1": [{
+						"path": "templates/box.htm",
+						"variation": {
+							"mainTag": "div",
+							"title": "Devon",
+							"image": "./media/images/as-acts.png"
+						}
+					}],
+					"item-2": [{
+						"path": "templates/box.htm",
+						"variation": {
+							"mainTag": "div",
+							"title": "Devon Jade",
+							"image": "./media/images/how-do-you-use-it.png"
+						}
+					}],
+					"item-3": [{
+						"path": "templates/box.htm",
+						"variation": {
+							"mainTag": "div",
+							"title": "Jade Devon",
+							"image": "./media/images/increases-the-effectiveness.png"
+						}
+					}]
+				}
+			}
+		}],
+		"foot" : [{
+			"path": "templates/banner.htm",
+			"variation": {
+				"mainTag": "div"
+			}
+		}, {
+			"path": "templates/footer.htm",
+			"variation": {
+				"mainTag": "footer"
+			}
+		}]
+	}
+}

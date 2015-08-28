@@ -1,0 +1,34 @@
+﻿.images-link {
+    padding-top: 15px;
+    .ui {
+        .container;   
+    }
+}
+.images-link--links {
+	ul {	
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+	
+	li {
+		.make-sm-column(3);
+		padding-top: 8px;
+		padding-bottom: 8px;
+		text-align: center;
+		
+		img {
+			max-width: 100%;
+		}
+	}
+	@media (min-width: @screen-tablet) {
+		.make-xs-column-offset(2);
+	}
+}
+
+.overview {
+	padding-top: 0.1px;
+	padding-bottom: 0.1px;
+	clear: left;
+	text-align: center;
+}

@@ -1,0 +1,33 @@
+{
+	"httpPort": 7777,
+	"enableIndex": true,
+	"enableLess": true,
+	"generatesRelativePath": "generates/",
+	"commonController": "common.js",
+	"commonVariation": "common.json",
+	"optimizations": {
+		"images": {	
+			"media/images/*.{gif,jpg,png,svg}": "media/images/",
+			"media/images/en-gb/*.{gif,jpg,png,svg}": "media/images/en-gb/",
+			"media/images/it-it/*.{gif,jpg,png,svg}": "media/images/it-it/"
+		}
+	},
+	"routes": {
+		"/home.html": {
+			"template": "standard.htm",
+			"variation": "home.json"
+		},
+		"/product.html": {
+			"template": "standard.htm",
+			"variation": "product.json"
+		},
+		"/in-safe-hands.html": {
+			"template": "standard.htm",
+			"variation": "in-safe-hands.json"
+		},
+		"/increases-the-effectiveness.html": {
+			"template": "simple.htm",
+			"variation": "increases-the-effectiveness.json"
+		}
+	}
+}

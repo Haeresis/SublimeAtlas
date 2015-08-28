@@ -1,0 +1,10 @@
+{
+	"components": {
+		"head" : [{
+			"path": "templates/head.htm"
+		}],
+		"foot" : [{
+			"path": "templates/foot.htm"
+		}]
+	}
+}
