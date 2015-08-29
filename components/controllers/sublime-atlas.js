@@ -32,9 +32,10 @@ var website = {};
     publics.includeComponents = function (variation, NA, componentVariation, activateSemantic) {
         var ejs = NA.modules.ejs;
 
-        variation.ic = variation.includeComponents = function (placeholder, component) {
+        variation.ic = variation.includeComponents = function (placeholder, component, path) {
             var render = "",
                 currentComponents = variation.specific[componentVariation],
+                currentVariation,
                 currentPath,
                 dom = "";
 
@@ -54,18 +55,19 @@ var website = {};
             if (typeof currentComponents !== 'undefined' && typeof currentComponents[placeholder] !== 'undefined' && currentComponents[placeholder].length > 0) {
                 for (var i = 0; i < currentComponents[placeholder].length; i++) {
 
-                    currentPath = 'specific["' + componentVariation + '"]["' + placeholder + '"][' + i + '].variation';
+                    currentVariation = 'specific["' + componentVariation + '"]["' + placeholder + '"][' + i + '].variation';
+                    currentPath = ((path) ? path : "") + componentVariation + "." + placeholder + "[" + i + "].variation.";
 
                     if (component) {
                         if (typeof component === 'string') {
-                            currentPath = component + '["' + componentVariation + '"]["' + placeholder + '"][' + i + '].variation';
+                            currentVariation = component + '["' + componentVariation + '"]["' + placeholder + '"][' + i + '].variation';
                         } else {
-                            currentPath = JSON.stringify(currentComponents[placeholder][i].variation);
+                            currentVariation = JSON.stringify(currentComponents[placeholder][i].variation);
                         }
                     }
 
                     dom = ejs.render(
-                        '<%- include("' + currentComponents[placeholder][i].path + '", { component: ' + currentPath + ' }) %>',
+                        '<%- include("' + currentComponents[placeholder][i].path + '", { component: ' + currentVariation + ', path : "' + currentPath + '" }) %>',
                         variation
                     );
 
