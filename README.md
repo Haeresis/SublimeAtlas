@@ -486,6 +486,35 @@ Il suffit de passer `path` comme c'est le cas de `component` lors de l'inclusion
 Vous trouverez des exemples d'utilisation sur le [repository de EditAtlas](https://github.com/Haeresis/EditAtlas/).
 
 
+
+
+
+## Lancer ce repository en local ##
+
+Pour faire tourner le site en local, il vous faudra installer [NodeAtlas](http://www.lesieur.name/node-atlas/) sur votre poste de développement.
+
+Déplacez vous ensuite dans le dossier :
+
+
+```
+\> cd </path/to/blog>
+```
+
+et utilisez la commande :
+
+```
+\> node </path/to/>node-atlas/node-atlas.js --browse
+```
+
+ou lancez `server.na` en double cliquant dessus :
+- en expliquant à votre OS que les fichiers `.na` sont lancé par défaut par `node`,
+- en ayant installé `node-atlas` via `npm install -g node-atlas`
+- en étant sur que votre variable d'environnement `NODE_PATH` pointe bien sur le dossier des `node_modules` globaux.
+
+Le site sera accessible ici :
+
+- *http://localhost:7777/*
+
 -----
 
 
