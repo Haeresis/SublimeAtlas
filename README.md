@@ -90,7 +90,7 @@ et le fichier de variation spécifique `variations/home.json` suivant :
 
 ```js
 {
-	"titleOfPage": "Titre de la Page",
+	"titleOfPage": "Title of the Page",
     "components": {
         "headerPlaceholder": [{
             "path": "name-of-component.htm",
@@ -183,7 +183,7 @@ et le fichier de variation spécifique `variations/home.json` suivant :
 
 ```js
 {
-    "titleOfPage": "Titre de la Page",
+    "titleOfPage": "Title of the Page",
     "components": {
         "mainPlaceholder": [{
             "path": "name-of-component.htm",
@@ -206,7 +206,7 @@ et le fichier de variation commune `variations/common.json` suivant :
 
 ```js
 {
-    "titleOfPage": "Titre de la Page",
+    "titleOfPage": "Title of the Page",
     "components": {
         "headerPlaceholder": [{
             "path": "name-of-component.htm",
@@ -256,7 +256,7 @@ ainsi que le composant `components/name-of-component.htm` suivant :
 on peut générer une page. Voyons l'utilité de `$` et de `mainTag` ci-après.
 
 
-### Modification de Header contextuel ###
+### Modification de Headers contextuel ###
 
 Il serait intéressant de pouvoir transformer les `<section>` dans vos composants par une autre balise HTML5 ou même une simple `<div>` au besoin car cela dépend de où vous déciderez de déposer le composant.
 
@@ -306,7 +306,7 @@ et le fichier de variation spécifique `variations/home.json` suivant :
 
 ```js
 {
-    "titleOfPage": "Titre de la Page",
+    "titleOfPage": "Title of the Page",
     "components": {
         "root": [{
             "path": "name-of-component.htm",
@@ -446,11 +446,13 @@ Le composant `components/name-of-component.htm` de notre exemple précédent aur
 
 
 
-### Intégrer SublimeAtlas à votre site NodeAtlas ###
+
+
+## Intégrer SublimeAtlas à votre site NodeAtlas ##
 
 Malgré le nombre de fichier dans cet exemple, le coeur même utile de SublimeAtlas pour vos propres sites node.js avec NodeAtlas se résume à un fichier et un appel.
 
-#### Inclusion côté server ####
+### Inclusion côté server ###
 
 Il va falloir faire appel à une fonction provenant du fichier `components/controllers/sublime-atlas.js` dans votre controlleur commun pour permettre au moteur de template de reconnaître `includeComponents` comme dans cet exemple dans `controllers/common.js` :
 
@@ -477,7 +479,10 @@ variation = require('../components/controllers/sublime-atlas').includeComponents
 ```
 
 
-### Utilisation avec EditAtlas ###
+
+
+
+## Utilisation avec EditAtlas ##
 
 Grâce à l'objet `path` en complément de l'objet `component` accessible depuis chaque composant, vous pouvez savoir dans quelle lot de variations de composants les variables courantes sont. Cela vous permet de les retrouver dans vos fichiers `common` ou `specific` par leur chemin absolue ce qui va être parfait pour utiliser [EditAtlas](https://github.com/Haeresis/EditAtlas/).
 
@@ -515,6 +520,7 @@ Le site sera accessible ici :
 
 - *http://localhost:7777/*
 
+
 -----
 
 
@@ -522,4 +528,513 @@ Le site sera accessible ici :
 
 ### Overview ###
 
-Work in progress for this documentation.
+SublimeAtlas allow us to manage a website or HTML assets with nested Components with thanks to [NodeAtlas](http://www.lesieur.name/nodeatlas/). The website can be struct by piece of component just with modification into variation files (`.json`) in real time (no restart).
+
+1. Component are not include with `include('name-of-component.htm')` but placeholders of components are setted with `includeComponents('componentsPlaceholder')`.
+
+2. Each placeholder allow you to inject a list of components (and not just one).
+
+3. Each component can be used its own set of `specific` variables.
+
+4. Components can be include into components that can be include into components that can be...
+
+5. The full tree of injected component are manage in real time via variation files.
+
+6. Full compatibility with [EditAtlas](https://github.com/Haeresis/EditAtlas/) for edit in real time the components tree for modify the structure of page.
+
+You can download this repository to test it or integrate it with any of your [NodeAtlas](http://www.lesieur.name/nodeatlas/) on node.js projects.
+
+
+
+## How does it work ##
+
+[NodeAtlas](http://www.lesieur.name/nodeatlas/) use an inclusion mechanism can be HTML parts to allow us to change easily your website structure.
+
+The problem with `include` function is the path of file included is setted in hard way:
+
+```html
+<%- include("name-of-component.htm") %>
+```
+
+With a little tricks, its possible to not set the file included into template file but into variation file to inject « in the fly » the component:
+
+```html
+<%- include(specific.nameOfComponent) %>
+```
+
+We concluded quickly it will be cool :
+- to correctly named and nested variation files for manage page.
+- to include more one component if we want include a component in a placeholder.
+- to manage set of `specific` variation by component and not just by template. It's allow us to include a component more one time in the same page with others variations.
+
+```html
+<% for (var i = 0; i < specific.component['firstComponentsPlaceholder'].length; i++) { %>
+    <%- include(specific.component['firstComponentsPlaceholder'][i].nameOfComponent.path, specific.component['firstComponentsPlaceholder'][i].nameOfComponent.variation) %>
+<% } %>
+```
+
+It's a good idea also to allow us to include component into component and use this mechanism with [EditAtlas](https://github.com/Haeresis/EditAtlas/) ! It's the job of SublimeAtlas.
+
+
+### Include Components into a Template ###
+
+It's possible with `includeComponents('componentsPlaceholder')`. For example:
+
+With the following `templates/home.htm` template:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title><%- specific.titleOfPage %></title>
+    </head>
+    <body>
+        <div class="layout">
+            <h1><%- specific.titleOfPage %></h1>
+            <header>
+                <%- includeComponents('headerPlaceholder') %>
+            </header>
+            <%- includeComponents('mainPlaceholder') %>
+            <footer>
+                <%- includeComponents('footerPlaceholder') %>
+            </footer>
+        </div>      
+    </body>
+</html>
+```
+
+and the following specific `variations/home.json` variation file:
+
+```js
+{
+    "titleOfPage": "Title of the Page",
+    "components": {
+        "headerPlaceholder": [{
+            "path": "name-of-component.htm",
+            "variation": {
+                "title": "Title 1",
+                "content": "Content 1"
+            }       
+        }, {
+            "path": "name-of-component.htm",
+            "variation": {
+                "title": "Title 2",
+                "content": "Content 2"
+            }
+        }],
+        "mainPlaceholder": [{
+            "path": "name-of-component.htm",
+            "variation": {
+                "title": "Title 3",
+                "content": "Content 3"
+            }
+        }, {
+            "path": "name-of-component.htm",
+            "variation": {
+                "title": "Title 4",
+                "content": "Content 4"
+            }
+        }],
+        "footerPlaceholder": [{
+            "path": "name-of-component.htm",
+            "variation": {
+                "title": "Title 5",
+                "content": "Content 5"
+            }
+        }, {
+            "path": "name-of-component.htm",
+            "variation": {
+                "title": "Title 6",
+                "content": "Content 6"
+            }
+        }]
+    }
+}
+```
+
+and the following `components/name-of-component.htm` component:
+
+```html
+<section class="name-of-component.htm">
+    <div class="ui">
+        <h1><%- component.title %></h1>
+        <%- component.content %>
+    </div>
+</section>
+```
+
+we could manage a page. Note that redefine list of component into placeholders allow us to change the structure of final page. Each time of a page is requested, the variation file is re-parsed and no restart is required.
+
+
+### Include component from common variations ### 
+
+It's also possible to include components from common variation files `variations/common.js` for the components used on all or more one template.
+
+For this, just use in second parameter the keyword `common`: `includeComponents('componentsPlaceholder', 'common')`. For example:
+
+with the following `templates/home.htm` template:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+        <title><%- specific.titleOfPage %></title>
+    </head>
+    <body>
+        <div class="layout">
+            <h1><%- specific.titleOfPage %></h1>
+            <header>
+                <%- includeComponents('headerPlaceholder', 'common') %>
+            </header>
+            <%- includeComponents('mainPlaceholder') %>
+            <footer>
+                <%- includeComponents('footerPlaceholder', 'common') %>
+            </footer>
+        </div>      
+    </body>
+</html>
+```
+
+and the following `variations/home.json` specific variation:
+
+```js
+{
+    "titleOfPage": "Title of the Page",
+    "components": {
+        "mainPlaceholder": [{
+            "path": "name-of-component.htm",
+            "variation": {
+                "title": "Title 3",
+                "content": "Content 3"
+            }
+        }, {
+            "path": "name-of-component.htm",
+            "variation": {
+                "title": "Title 4",
+                "content": "Content 4"
+            }
+        }]
+    }
+}
+```
+
+and the following `variations/common.json` common variation:
+
+```js
+{
+    "titleOfPage": "Title of the Page",
+    "components": {
+        "headerPlaceholder": [{
+            "path": "name-of-component.htm",
+            "variation": {
+                "mainTag": "div",
+                "title": "Title 1",
+                "content": "Content 1"
+            }
+        }, {
+            "path": "name-of-component.htm",
+            "variation": {
+                "mainTag": "div",
+                "title": "Title 2",
+                "content": "Content 2"
+            }
+        }],
+        "footerPlaceholder": [{
+            "path": "name-of-component.htm",
+            "variation": {
+                "mainTag": "div",
+                "title": "Title 5",
+                "content": "Content 5"
+            }
+        }, {
+            "path": "name-of-component.htm",
+            "variation": {
+                "mainTag": "div",
+                "title": "Title 6",
+                "content": "Content 6"
+            }
+        }]
+    }
+}
+```
+
+and the following `components/name-of-component.htm` component:
+
+```html
+<section$ class="name-of-component.htm">
+    <div class="ui">
+        <h1$><%- component.title %></h1$>
+        <%- component.content %>
+    </div>
+</section$>
+```
+
+we could manage a page. We will see the `$` and `mainTag` in component file below.
+
+
+### Modify Contextual Headers ###
+
+It's a good idea to allow us to automaticly transform `<section>` into components by an other HTML5 tag or just a simple `<div>` because we will not use the same global tag by context.
+
+In this case, it's interesting to transform `<section>` in `<div>` because it will be injected into a `<header>` or a `<footer>`.
+
+The problem is double `<h1>` into `<header>`. The `<h1>` from template and the `<h1>` from component. SublimeAtlas allow you to resolve conflict in a simply way !
+
+You have maybe seen in `components/name-of-component.htm` component the `$` into the `<section>` tag and into the `<h1>` tag. And you have maybe seen a `mainTag` variable for each component from `variations/common.json` file.
+
+
+This `$` are remove from final HTML render if no `mainTag` are found into variation for the component. But if a `mainTag` exist, a list of transformations are executed.
+
+That are the transformation:
+
+- If exist `<nav$>...</nav$>`, `<aside$>...</aside$>`, `<section$>...</section$>`, `<article$>...</article$>` or `<div$>...</div$>` tags, it will be replaced by the tag specify into `mainTag`. 
+   *For example into our component: `<section$>...</section$>` become `<div>...</div>` because `mainTag` value is `div`.*
+   
+- If mainTag value is : `div`, `header` or `footer`, so all tags `<header$>...<header$>`, `<footer$>...</footer$>`, `<h1$>...</h1$>`, `<h2$>...</h2$>`, `<h3$>...</h3$>`, `<h4$>...</h4$>`, `<h5$>...</h5$>` or `<h6$>...</h6$>` will be respectively replaced by tags: `<div class="header-like" $>...<div>`, `<div class="footer-like" $>...</div>`, `<div class="h1-like">...</div>`, `<div class="h2-like">...</div>`, `<div class="h3-like">...</div>`, `<div class="h4-like">...</div>`, `<div class="h5-like">...</div>` or `<div class="h6-like">...</div>`.
+
+
+### Include Components into Component ###
+
+It's possible to include nested components in components to realize every structure of pages you want. For this, pass the `component` variable when you include a component : `<%- includeComponents('componentsPlaceholder', component) %>`. 
+
+*Note : it's still possible to inject a component from the root of `specific` or `common` variation files with `<%- includeComponents('componentsPlaceholder') %>` or `<%- includeComponents('componentsPlaceholder', 'common') %>`.*
+
+For example : 
+
+with the following `templates/home.htm` template:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title><%- specific.titleOfPage %></title>
+    </head>
+    <body>
+        <div class="layout">
+            <h1><%- specific.titleOfPage %></h1>
+            <%- includeComponents('root') %>
+        </div>      
+    </body>
+</html>
+```
+
+and the following specific `variations/home.json` variation files:
+
+```js
+{
+    "titleOfPage": "Title of the Page",
+    "components": {
+        "root": [{
+            "path": "name-of-component.htm",
+            "variation": {
+                "mainTag": "header",
+                "title": "Title Header",
+                "content": "Content Header",
+                "components": {
+                    "item1": [{
+                        "path": "name-of-component.htm",
+                        "variation": { 
+                            "mainTag": "nav"
+                            "content": "Content Main Nav"
+                        }
+                    }]
+                }
+            }
+        }, {
+            "path": "name-of-component.htm",
+            "variation": {
+                "mainTag": "article",
+                "title": "Title Content",
+                "content": "Content Content",
+                "components": {
+                    "item1": [{
+                        "path": "name-of-component.htm",
+                        "variation": { 
+                            "mainTag": "aside"
+                            "title": "Title Ads 1"
+                        }
+                    }],
+                    "item2": [{
+                        "path": "name-of-component.htm",
+                        "variation": { 
+                            "mainTag": "div"
+                            "content": "Main Content"
+                        }
+                    }],
+                    "item3": [{
+                        "path": "name-of-component.htm",
+                        "variation": { 
+                            "mainTag": "aside"
+                            "title": "Title Ads 2"
+                        }
+                    }]
+                }
+            }
+        }, {
+            "path": "name-of-component.htm",
+            "variation": {
+                "mainTag": "aside",
+                "title": "Title Aside",
+                "content": "Content Aside"
+            }
+        }, {
+            "path": "name-of-component.htm",
+            "variation": {
+                "mainTag": "footer",
+                "title": "Title Footer",
+                "content": "Content Footer",
+                "components": {
+                    "item1": [{
+                        "path": "name-of-component.htm",
+                        "variation": { 
+                            "mainTag": "nav"
+                            "content": "Content Second Nav"
+                        }
+                    }]
+                }
+            }
+        }]
+    }
+}
+```
+
+and the following specific `components/name-of-component.htm` composant:
+
+```html
+<section$ class="name-of-component.htm">
+    <div class="ui">
+        <h1$><%- component.title %></h1$>
+        <%- component.content %>
+        <ul>
+            <% if (component && component.components && component.components['item1']) { %>
+            <li>
+                <div class="component-example--item">
+                    <%- includeComponents('item1', component) %>
+                </div>
+            </li>
+            <% } %>
+            <% if (component && component.components && component.components['item2']) { %>
+            <li>
+                <div class="component-example--item">
+                    <%- includeComponents('item2', component) %>
+                </div>
+            </li>
+            <% } %>
+            <% if (component && component.components && component.components['item3']) { %>
+            <li>
+                <div class="component-example--item">
+                    <%- includeComponents('item3', component) %>
+                </div>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+</section$>
+```
+
+We can manage the page we want, with the desired containers and a perfect HTML5 semantic.
+
+#### Loop of Component ####
+
+The `components/name-of-component.htm` component from previous example could be a loop as following:
+
+```html
+<section$ class="name-of-component.htm">
+    <div class="ui">
+        <h1$><%- component.title %></h1$>
+        <%- component.content %>
+        <% if (component && component.components) { %>
+        <ul>
+        <% for (var placeholder in component.components) { %>
+            <% if (component.components.hasOwnProperty(placeholder)) { %>
+            <li>
+                <div class="component-example--item">
+                    <%- includeComponents(placeholder, component, path) %>
+                </div>
+            </li>
+            <% } %>
+        <% } %>
+        </ul>
+        <% } %>
+    </div>
+</section$>
+```
+
+
+
+
+
+## Embed SublimeAtlas to your NodeAtlas website ##
+
+Despite the number of file in this example, the SublimeAtlas core useful for your own websites with node.js is a one file and one calling.
+
+### Server Side Inclusion ###
+
+The feature you will run could be find into the `components/controllers/sublime-atlas.js` file. Use it in your common controller as following:
+
+```js
+(function (publics) {
+    "use strict";
+
+    publics.changeVariation = function (params, mainCallback) {
+        var variation = params.variation,
+            NA = params.NA;
+        
+        variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA);
+
+        mainCallback(variation);
+    };
+
+}(website));
+```
+
+You can change `mainTag` with other value when you call the function and also set your component into a `components` parameter different. See this example with `tag` and `placeholders`:
+
+```js
+variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA, "placeholders", "tag");
+```
+
+
+
+
+
+## Using with EditAtlas ##
+
+With `path` object in addition of `component` deliver into an HTML component, you can know what set of variations component are currently in use from `specific` or `common` file. This is useful for [EditAtlas](https://github.com/Haeresis/EditAtlas/).
+
+Just pass the `path` in same way of `component` when you include a component into a component: `<%- includeComponents('componentsPlaceholder', component, path) %>` (from a template, not set that).
+
+You find utilisation example on the [EditAtlas repository](https://github.com/Haeresis/EditAtlas/).
+
+
+
+
+
+## Run the website in local server ##
+
+To run the website in local, you must install [NodeAtlas](http://www.lesieur.name/node-atlas/) on your development machine.
+
+Then you move into the folder:
+
+
+```
+\> cd </path/to/blog>
+```
+
+and use the command:
+
+```
+\> node </path/to/>node-atlas/node-atlas.js --browse
+```
+
+or run `server.na` by double clicking and:
+- explaining your OS that .na files are run by default with node,
+- having installed node-atlas via npm install -g node-atlas
+- being on your environment variable NODE_PATH is pointing to the global node_modules folder.
+
+The website will be to:
+
+- *http://localhost:7777/*
