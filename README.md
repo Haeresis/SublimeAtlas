@@ -1,8 +1,8 @@
 # SublimeAtlas #
 
-Version : 0.1 (Beta)
+Version : 0.2 (Beta)
 
-NodeAtlas Version minimale : 0.44
+NodeAtlas Version minimale : 1.0
 
 **For an international version of this README.md, [see below](#international-version).**
 

@@ -8,9 +8,9 @@ website.components = {};
     website.components.sublimeAtlas = require('../components/controllers/sublime-atlas');
 
     publics.changeVariation = function (params, mainCallback) {
-        var variation = params.variation,
-            NA = params.NA;
-        
+        var NA = this,
+        	variation = params.variation;
+
         variation = website.components.sublimeAtlas.includeComponents(variation, NA, "components", "mainTag");
 
         mainCallback(variation);
