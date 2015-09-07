@@ -45,7 +45,7 @@
 						"variation": {
 							"mainTag": "div",
 							"title": "Devon",
-							"image": "./media/images/as-acts.png"
+							"image": "./media/images/act.png"
 						}
 					}],
 					"item-2": [{
@@ -53,7 +53,7 @@
 						"variation": {
 							"mainTag": "div",
 							"title": "Devon Jade",
-							"image": "./media/images/how-do-you-use-it.png"
+							"image": "./media/images/use.png"
 						}
 					}],
 					"item-3": [{
@@ -61,7 +61,7 @@
 						"variation": {
 							"mainTag": "div",
 							"title": "Jade Devon",
-							"image": "./media/images/increases-the-effectiveness.png"
+							"image": "./media/images/the.png"
 						}
 					}]
 				}

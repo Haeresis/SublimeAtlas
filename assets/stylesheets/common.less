@@ -8,53 +8,10 @@
 	font-family: Arial, sans-serif;
 }
 
-@font-face {
-	font-family: 'OfficinaSansStd-Book';
-	src: url('../media/fonts/OfficinaSansStd-Book.eot?#iefix') format('embedded-opentype'),
-	   url('../media/fonts/OfficinaSansStd-Book.woff') format('woff'), 
-	   url('../media/fonts/OfficinaSansStd-Book.ttf')  format('truetype'),
-	   url('../media/fonts/OfficinaSansStd-Book.svg#OfficinaSansStd-Book') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-.officina-sans-std {
-	font-family: 'OfficinaSansStd-Book', Arial, sans-serif;
-}
-
-@font-face {
-	font-family: 'AvantGardeITCbyBT-Book';
-	src: url('../media/fonts/AvantGardeITCbyBT-Book.eot?#iefix') format('embedded-opentype'),
-	   url('../media/fonts/AvantGardeITCbyBT-Book.woff') format('woff'), 
-	   url('../media/fonts/AvantGardeITCbyBT-Book.ttf')  format('truetype'),
-	   url('../media/fonts/AvantGardeITCbyBT-Book.svg#AvantGardeITCbyBT-Book') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-.avant-garde-itc-by-bc {
-	font-family: 'AvantGardeITCbyBT-Book', Arial, sans-serif;
-}
-
-@font-face {
-	font-family: 'FuturaBT-MediumCondensed';
-	src: url('../media/fonts/FuturaBT-MediumCondensed.eot?#iefix') format('embedded-opentype'),
-	   url('../media/fonts/FuturaBT-MediumCondensed.woff') format('woff'), 
-	   url('../media/fonts/FuturaBT-MediumCondensed.ttf')  format('truetype'),
-	   url('../media/fonts/FuturaBT-MediumCondensed.svg#FuturaBT-MediumCondensed') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-.futura-bt-medium-condensed {
-	font-family: 'FuturaBT-MediumCondensed', Arial, sans-serif;
-}
-
-.georgia {
-	font-family: 'Time New Roman', Arial, sans-serif;	
-}
-
 .boxSizingBorderBox();
 
 html {
-	font-size: 62.5%;	
+	font-size: 62.5%;
 }
 body {
 	overflow-x: hidden;
@@ -76,7 +33,7 @@ h2,
 	font-weight: normal;
     margin-top: 0;
     margin-bottom: 0;
-    .avant-garde-itc-by-bc;
+    .arial;
     font-size: 2rem;
     color: #FFF;
     padding-bottom: 15px;
@@ -90,9 +47,9 @@ h2,
 }
 
 p {
-	.avant-garde-itc-by-bc;
+	.arial;
 	font-size: 1.6rem;
-	color: #07572B;
+	color: #bbbbbb;
 }
 
 .text-center {
@@ -128,7 +85,7 @@ input {
 		font-size: 1.8rem;
 	}
 	color: #898989;
-	.avant-garde-itc-by-bc;
+	.arial;
 	text-transform: uppercase;
 	width: 100%;
 	border: 0;
@@ -136,7 +93,7 @@ input {
 }
 
 input {
-	padding: 16px;	
+	padding: 16px;
 }
 select {
 	padding: 15px 16px;
@@ -146,7 +103,7 @@ select {
 	padding-top: 4px;
 	text-align: left;
 	display: block;
-	.avant-garde-itc-by-bc;
+	.arial;
 	font-size: 1.2rem;
 }
 .input-validation-error {
@@ -157,12 +114,12 @@ select {
 	border: 0;
 	background-color: transparent;
 	position: relative;
-	
+
 	&:before {
 		content: "";
 		position: absolute;
 		display: block;
-		background-image: url('../media/images/small-background.png');
+		background-image: url('http://i659.photobucket.com/albums/uu313/1stFloorFlatComputery/db1c44d1.png');
 		-webkit-background-size: 100% 100%;
 		     -o-background-size: 100% 100%;
 		        background-size: 100% 100%;
@@ -172,15 +129,15 @@ select {
 		left: 0;
 	}
 
-	padding: 16px 20px;	
+	padding: 16px 20px;
 	&.as-small {
 		padding: 8px 10px;
 		span {
 			font-size: 1.6rem;
 		}
 	}
-	
-	
+
+
 	img {
 		position: absolute;
 		top: 0;
@@ -194,19 +151,19 @@ select {
 		z-index: 2;
 		display: inline-block;
 		font-size: 3rem;
-		color: #fff;
-		.futura-bt-medium-condensed;
+		color: #909;
+		.arial;
 	}
 }
 
 .containing {
     .container;
     padding: 0;
-    
+
 	background-image: url('../media/images/secondary-background.jpg');
-	-webkit-background-size: contain;
-	     -o-background-size: contain;
-	        background-size: contain;
+	-webkit-background-size: cover;
+	     -o-background-size: cover;
+	        background-size: cover;
 	background-position: top center;
 }
 

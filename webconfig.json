@@ -21,13 +21,13 @@
 			"template": "standard.htm",
 			"variation": "product.json"
 		},
-		"/in-safe-hands.html": {
+		"/other.html": {
 			"template": "standard.htm",
-			"variation": "in-safe-hands.json"
+			"variation": "sh.json"
 		},
-		"/increases-the-effectiveness.html": {
+		"/list.html": {
 			"template": "simple.htm",
-			"variation": "increases-the-effectiveness.json"
+			"variation": "the.json"
 		}
 	}
 }

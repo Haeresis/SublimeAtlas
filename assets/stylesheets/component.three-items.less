@@ -1,23 +1,23 @@
 ﻿.three-items {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	
+
     .ui {
     	position: relative;
         max-width: @screen-lg-desktop;
         text-align: center;
-        
+
         h2,
         .h2-like {
         	display: inline-block;
         	font-size: 3.8rem;
-        	color: #0e7c2b;
+        	color: #bbbbbb;
         	text-transform: none;
         	vertical-align: middle;
-        	.futura-bt-medium-condensed;
+        	.arial;
         	padding-right: 8px;
         	a {
-        		color: #0e7c2b;
+        		color: #bbbbbb;
         	}
         }
 
@@ -30,9 +30,9 @@
 .three-items--item {
 	.make-sm-column(4);
     position: relative;
-    
+
     &:nth-child(2):before,
-    &:nth-child(2):after {        
+    &:nth-child(2):after {
         content: "";
         position: absolute;
         background-repeat: no-repeat;
@@ -46,7 +46,7 @@
         padding-top: 10px;
         padding-bottom: 10px;
     }
-    
+
     &:nth-child(2):before {
         top: -10px;
     }
@@ -54,11 +54,11 @@
     &:nth-child(2):after {
         bottom: -15px;
     }
-    
+
     @media (min-width: @screen-tablet) {
         &:nth-child(2):before,
         &:nth-child(2):after {
-            padding: 0;      
+            padding: 0;
             top: 0;
             left: auto;
             bottom: auto;
@@ -69,7 +69,7 @@
                  -o-background-size: 3px 100%;
                     background-size: 3px 100%;
         }
-        
+
         &:nth-child(2):before {
             left: -1.5px;
         }

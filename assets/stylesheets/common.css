@@ -293,36 +293,6 @@ th {
 .arial {
   font-family: Arial, sans-serif;
 }
-@font-face {
-  font-family: 'OfficinaSansStd-Book';
-  src: url('../media/fonts/OfficinaSansStd-Book.eot?#iefix') format('embedded-opentype'), url('../media/fonts/OfficinaSansStd-Book.woff') format('woff'), url('../media/fonts/OfficinaSansStd-Book.ttf') format('truetype'), url('../media/fonts/OfficinaSansStd-Book.svg#OfficinaSansStd-Book') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-.officina-sans-std {
-  font-family: 'OfficinaSansStd-Book', Arial, sans-serif;
-}
-@font-face {
-  font-family: 'AvantGardeITCbyBT-Book';
-  src: url('../media/fonts/AvantGardeITCbyBT-Book.eot?#iefix') format('embedded-opentype'), url('../media/fonts/AvantGardeITCbyBT-Book.woff') format('woff'), url('../media/fonts/AvantGardeITCbyBT-Book.ttf') format('truetype'), url('../media/fonts/AvantGardeITCbyBT-Book.svg#AvantGardeITCbyBT-Book') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-.avant-garde-itc-by-bc {
-  font-family: 'AvantGardeITCbyBT-Book', Arial, sans-serif;
-}
-@font-face {
-  font-family: 'FuturaBT-MediumCondensed';
-  src: url('../media/fonts/FuturaBT-MediumCondensed.eot?#iefix') format('embedded-opentype'), url('../media/fonts/FuturaBT-MediumCondensed.woff') format('woff'), url('../media/fonts/FuturaBT-MediumCondensed.ttf') format('truetype'), url('../media/fonts/FuturaBT-MediumCondensed.svg#FuturaBT-MediumCondensed') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-.futura-bt-medium-condensed {
-  font-family: 'FuturaBT-MediumCondensed', Arial, sans-serif;
-}
-.georgia {
-  font-family: 'Time New Roman', Arial, sans-serif;
-}
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -347,7 +317,7 @@ h2,
   font-weight: normal;
   margin-top: 0;
   margin-bottom: 0;
-  font-family: 'AvantGardeITCbyBT-Book', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 2rem;
   color: #FFF;
   padding-bottom: 15px;
@@ -370,9 +340,9 @@ h2.alternative,
   }
 }
 p {
-  font-family: 'AvantGardeITCbyBT-Book', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 1.6rem;
-  color: #07572B;
+  color: #bbbbbb;
 }
 .text-center {
   text-align: center;
@@ -408,7 +378,7 @@ input {
   margin: 0;
   font-size: 1.2rem;
   color: #898989;
-  font-family: 'AvantGardeITCbyBT-Book', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   text-transform: uppercase;
   width: 100%;
   border: 0;
@@ -431,7 +401,7 @@ select {
   padding-top: 4px;
   text-align: left;
   display: block;
-  font-family: 'AvantGardeITCbyBT-Book', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 1.2rem;
 }
 .input-validation-error {
@@ -447,7 +417,7 @@ select {
   content: "";
   position: absolute;
   display: block;
-  background-image: url('../media/images/small-background.png');
+  background-image: url('http://i659.photobucket.com/albums/uu313/1stFloorFlatComputery/db1c44d1.png');
   -webkit-background-size: 100% 100%;
   -o-background-size: 100% 100%;
   background-size: 100% 100%;
@@ -474,8 +444,8 @@ select {
   z-index: 2;
   display: inline-block;
   font-size: 3rem;
-  color: #fff;
-  font-family: 'FuturaBT-MediumCondensed', Arial, sans-serif;
+  color: #909;
+  font-family: Arial, sans-serif;
 }
 .containing {
   margin-right: auto;
@@ -484,9 +454,9 @@ select {
   padding-right: 15px;
   padding: 0;
   background-image: url('../media/images/secondary-background.jpg');
-  -webkit-background-size: contain;
-  -o-background-size: contain;
-  background-size: contain;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   background-position: top center;
 }
 @media (min-width: 768px) {
@@ -610,7 +580,7 @@ select {
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 1.2rem;
-  font-family: 'AvantGardeITCbyBT-Book', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   text-decoration: none;
 }
 .rubbon--abstract a:hover {
@@ -630,7 +600,7 @@ select {
   }
 }
 .header-main {
-  background-color: #5a8519;
+  background-color: #5F9F9F;
   padding-top: 14px;
   padding-bottom: 14px;
 }
@@ -722,7 +692,7 @@ select {
   list-style-type: none;
 }
 .header-main--links li {
-  font-family: 'OfficinaSansStd-Book', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 2rem;
   padding-top: 4px;
   padding-left: 8px;
@@ -830,10 +800,10 @@ select {
 .title .h1-like {
   margin-top: 0;
   margin-bottom: 0;
-  font-family: 'OfficinaSansStd-Book', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-weight: bold;
   font-size: 3.2rem;
-  color: #063;
+  color: #bbbbbb;
 }
 .title--logo {
   max-width: 100%;
@@ -954,9 +924,9 @@ select {
 }
 .overview h1,
 .overview .h1-like {
-  font-family: 'FuturaBT-MediumCondensed', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 5.8rem;
-  color: #0e7c2b;
+  color: #bbbbbb;
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -1052,7 +1022,7 @@ select {
   }
 }
 .image-list--list p {
-  font-family: 'AvantGardeITCbyBT-Book', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 1.4rem;
   color: #fff;
   position: relative;
@@ -1069,7 +1039,7 @@ select {
 }
 .image-list--list li:before {
   content: "";
-  background-image: url('../media/images/medium-background.png');
+  background-image: url('http://i659.photobucket.com/albums/uu313/1stFloorFlatComputery/db1c44d1.png');
   -webkit-background-size: 100% 100%;
   -o-background-size: 100% 100%;
   background-size: 100% 100%;
@@ -1161,15 +1131,15 @@ select {
 .three-items .ui .h2-like {
   display: inline-block;
   font-size: 3.8rem;
-  color: #0e7c2b;
+  color: #bbbbbb;
   text-transform: none;
   vertical-align: middle;
-  font-family: 'FuturaBT-MediumCondensed', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   padding-right: 8px;
 }
 .three-items .ui h2 a,
 .three-items .ui .h2-like a {
-  color: #0e7c2b;
+  color: #bbbbbb;
 }
 .three-items .ui img {
   max-width: 100%;
@@ -1274,10 +1244,10 @@ select {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 .footer-main .ui {
-  background-color: #f2eedf;
+  background-color: #5F9F9F;
 }
 .footer-main--title {
-  font-family: 'OfficinaSansStd-Book', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 1.6rem;
   color: #fff;
   margin-bottom: 15px;
@@ -1319,7 +1289,6 @@ select {
 .ui.as-first {
   padding-top: 20px;
   padding-bottom: 20px;
-  border-bottom: 8px solid #4a4542;
 }
 .ui.as-first .footer-main--logo {
   position: relative;
@@ -1376,7 +1345,7 @@ select {
   list-style-type: none;
 }
 .ui.as-first .footer-main--utils li {
-  font-family: 'OfficinaSansStd-Book', Arial, sans-serif;
+  font-family: Arial, sans-serif;
 }
 .ui.as-first .footer-main--utils li a {
   color: #4a4542;
@@ -1411,7 +1380,7 @@ select {
   text-align: center;
   padding-top: 4px;
   padding-bottom: 4px;
-  font-family: 'OfficinaSansStd-Book', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 2.3rem;
 }
 @media (min-width: 768px) {
@@ -1447,7 +1416,7 @@ select {
   clear: left;
   padding-top: 20px;
   padding-bottom: 8px;
-  background-color: #4a4542;
+  background-color: #333333;
 }
 .ui.as-third .footer-main--links {
   margin-right: auto;
@@ -1516,6 +1485,11 @@ select {
   margin-left: 8px;
   padding-left: 8px;
 }
+@media (min-width: 768px) {
+  .ui.as-third .footer-main--extend {
+    text-align: right;
+  }
+}
 .ui.as-third .footer-main--logo,
 .ui.as-third .footer-main--utils {
   position: relative;
@@ -1549,14 +1523,14 @@ select {
   }
 }
 .ui.as-fourth {
-  background-color: #d80015;
+  background-color: #5F9F9F;
 }
 .ui.as-fourth .footer-main--copyright {
   margin-right: auto;
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
-  font-family: 'OfficinaSansStd-Book', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   color: #fff;
   font-size: 1.1rem;
   padding-top: 8px;

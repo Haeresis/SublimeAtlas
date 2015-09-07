@@ -29,7 +29,7 @@
 				"mainTag": "article",
 				"content": "<p>Lorem ipsum dolor sit amet, consectetur <strong>adipisicing elit. Illo qui alias error nobis, consectetur</strong> a officia repellat ipsam magnam laudantium minus, dicta debitis ea, odio reiciendis! Pariatur, soluta tempore aspernatur.</p>",
 				"image": {
-					"src": "./media/images/it-it/product-cat.png",
+					"src": "./media/images/product.png",
 					"alt": "Lorem Ipsum"
 				}
 			}
@@ -50,7 +50,7 @@
 						"variation": {
 							"mainTag": "div",
 							"title": "Devon",
-							"image": "./media/images/as-acts.png"
+							"image": "./media/images/act.png"
 						}
 					}],
 					"item-2": [{
@@ -58,7 +58,7 @@
 						"variation": {
 							"mainTag": "div",
 							"title": "Devon Jade",
-							"image": "./media/images/how-do-you-use-it.png"
+							"image": "./media/images/use.png"
 						}
 					}],
 					"item-3": [{
@@ -66,7 +66,7 @@
 						"variation": {
 							"mainTag": "div",
 							"title": "Jade Devon",
-							"image": "./media/images/increases-the-effectiveness.png"
+							"image": "./media/images/the.png"
 						}
 					}]
 				}
