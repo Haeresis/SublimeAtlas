@@ -1,4 +1,4 @@
-# SublimeAtlas #
+# ComponentAtlas #
 
 Version : 0.2 (Beta)
 
@@ -10,7 +10,7 @@ NodeAtlas Version minimale : 1.0
 
 ## Avant-propos ##
 
-SublimeAtlas permet la construction de site ou maquette HTML par empilement de Composant (Component) avec [NodeAtlas](http://www.lesieur.name/nodeatlas/). Le site peut alors être construit par brique uniquement par modifications des fichiers de variations (`.json`) et le tout en temps réel (sans redémarrage).
+ComponentAtlas permet la construction de site ou maquette HTML par empilement de Composant (Component) avec [NodeAtlas](http://www.lesieur.name/nodeatlas/). Le site peut alors être construit par brique uniquement par modifications des fichiers de variations (`.json`) et le tout en temps réel (sans redémarrage).
 
 1. On n'inclut plus de composant avec `include('name-of-component.htm')` mais on défini des zones d’atterrissage de composants avec `includeComponents('componentsPlaceholder')`.
 
@@ -55,7 +55,7 @@ On arrive rapidement à la conclusion qu'il serait agréable :
 <% } %>
 ```
 
-On aimerait même pouvoir inclure des composants dans des composants et rendre ça compatible avec [EditAtlas](https://github.com/Haeresis/EditAtlas/) ! C'est ce que fait SublimeAtlas.
+On aimerait même pouvoir inclure des composants dans des composants et rendre ça compatible avec [EditAtlas](https://github.com/Haeresis/EditAtlas/) ! C'est ce que fait ComponentAtlas.
 
 
 ### Inclure des Composants dans un Template ###
@@ -81,7 +81,7 @@ Avec le template `templates/home.htm` suivant :
 			<footer>
 				<%- includeComponents('footerPlaceholder') %>
 			</footer>
-		</div>		
+		</div>
 	</body>
 </html>
 ```
@@ -97,7 +97,7 @@ et le fichier de variation spécifique `variations/home.json` suivant :
             "variation": {
                 "title": "Title 1",
                 "content": "Content 1"
-            }       
+            }
         }, {
             "path": "name-of-component.htm",
             "variation": {
@@ -149,9 +149,9 @@ ainsi que le composant `components/name-of-component.htm` suivant :
 on peut générer une page. Notez que redéfinir la liste des composants dans les « placeholder » vous permet de modifier la disposition de la page finale. Comme les fichiers de variations sont relu à chaque affichage de page, le changement ne nécéssite aucun redémarrage.
 
 
-### Inclusion depuis les variations communes ### 
+### Inclusion depuis les variations communes ###
 
-Il est également possible de mettre les composants se retrouvant sur chaque page dans le fichier de variation commune `variations/common.js`. 
+Il est également possible de mettre les composants se retrouvant sur chaque page dans le fichier de variation commune `variations/common.js`.
 
 Il suffit de placer en second paramètre le mot clé `common` : `includeComponents('componentsPlaceholder', 'common')`. Par exemple :
 
@@ -174,7 +174,7 @@ avec le template `templates/home.htm` suivant :
             <footer>
                 <%- includeComponents('footerPlaceholder', 'common') %>
             </footer>
-        </div>      
+        </div>
     </body>
 </html>
 ```
@@ -262,7 +262,7 @@ Il serait intéressant de pouvoir transformer les `<section>` dans vos composant
 
 Dans notre cas, il serait interessant d'avoir une simple `<div>` pour les composants injectés dans la partie `<header>` ou dans la partie `<footer>`.
 
-Le problème c'est qu'en faisant ça, vous aurez dans le `<header>` le `<h1>` principal mais également le `<h1>` du composant qui ne serait plus isolé dans une `<section>` devenue une `<div>`. Et bien SublimeAtlas peut gérer simplement tout cela !
+Le problème c'est qu'en faisant ça, vous aurez dans le `<header>` le `<h1>` principal mais également le `<h1>` du composant qui ne serait plus isolé dans une `<section>` devenue une `<div>`. Et bien ComponentAtlas peut gérer simplement tout cela !
 
 Vous aurez remarqué que le composant `components/name-of-component.htm` possède des `$` sur les balises `<section>` et sur la balise `<h1>`. Et qu'il y a une variable `mainTag` pour chaque composant du fichier `variations/common.json`.
 
@@ -270,19 +270,19 @@ Ces `$` sont retirés lors de la génération HTML finale s'il n'existe pas de `
 
 En voici les cas :
 
-- S'il existe des balises `<nav$>...</nav$>`, `<aside$>...</aside$>`, `<section$>...</section$>`, `<article$>...</article$>` ou `<div$>...</div$>` elles seront remplacées par le tag spécifié dans le `mainTag`. 
+- S'il existe des balises `<nav$>...</nav$>`, `<aside$>...</aside$>`, `<section$>...</section$>`, `<article$>...</article$>` ou `<div$>...</div$>` elles seront remplacées par le tag spécifié dans le `mainTag`.
    *Par exemple dans notre composant : `<section$>...</section$>` deviendra `<div>...</div>` car `mainTag` vaut `div`.*
-   
+
 - Si mainTag est égale à : `div`, `header` ou `footer`, alors toutes les balises `<header$>...<header$>`, `<footer$>...</footer$>`, `<h1$>...</h1$>`, `<h2$>...</h2$>`, `<h3$>...</h3$>`, `<h4$>...</h4$>`, `<h5$>...</h5$>` ou `<h6$>...</h6$>` deviendront respectivement des balises : `<div class="header-like" $>...<div>`, `<div class="footer-like" $>...</div>`, `<div class="h1-like">...</div>`, `<div class="h2-like">...</div>`, `<div class="h3-like">...</div>`, `<div class="h4-like">...</div>`, `<div class="h5-like">...</div>` ou `<div class="h6-like">...</div>`.
 
 
 ### Inclure des Composants dans un Composant ###
 
-Il est possible d'inclure en cascade des composants dans des composants de manière à pouvoir réaliser n'importe quelle page avec une cascade de n'importe quelles composants ou liste de composants. Il suffit en plus de passer la variable `component` : `<%- includeComponents('componentsPlaceholder', component) %>`. 
+Il est possible d'inclure en cascade des composants dans des composants de manière à pouvoir réaliser n'importe quelle page avec une cascade de n'importe quelles composants ou liste de composants. Il suffit en plus de passer la variable `component` : `<%- includeComponents('componentsPlaceholder', component) %>`.
 
 *Note : il est toujours possible dans un composant d'injecter un composant depuis la racine des variations `specific` ou `common` avec `<%- includeComponents('componentsPlaceholder') %>` ou `<%- includeComponents('componentsPlaceholder', 'common') %>`.*
 
-Par exemple : 
+Par exemple :
 
 avec le template `templates/home.htm` suivant :
 
@@ -297,7 +297,7 @@ avec le template `templates/home.htm` suivant :
         <div class="layout">
             <h1><%- specific.titleOfPage %></h1>
             <%- includeComponents('root') %>
-        </div>      
+        </div>
     </body>
 </html>
 ```
@@ -317,7 +317,7 @@ et le fichier de variation spécifique `variations/home.json` suivant :
                 "components": {
                     "item1": [{
                         "path": "name-of-component.htm",
-                        "variation": { 
+                        "variation": {
                             "mainTag": "nav"
                             "content": "Content Main Nav"
                         }
@@ -333,21 +333,21 @@ et le fichier de variation spécifique `variations/home.json` suivant :
                 "components": {
                     "item1": [{
                         "path": "name-of-component.htm",
-                        "variation": { 
+                        "variation": {
                             "mainTag": "aside"
                             "title": "Title Ads 1"
                         }
                     }],
                     "item2": [{
                         "path": "name-of-component.htm",
-                        "variation": { 
+                        "variation": {
                             "mainTag": "div"
                             "content": "Main Content"
                         }
                     }],
                     "item3": [{
                         "path": "name-of-component.htm",
-                        "variation": { 
+                        "variation": {
                             "mainTag": "aside"
                             "title": "Title Ads 2"
                         }
@@ -370,7 +370,7 @@ et le fichier de variation spécifique `variations/home.json` suivant :
                 "components": {
                     "item1": [{
                         "path": "name-of-component.htm",
-                        "variation": { 
+                        "variation": {
                             "mainTag": "nav"
                             "content": "Content Second Nav"
                         }
@@ -448,9 +448,9 @@ Le composant `components/name-of-component.htm` de notre exemple précédent aur
 
 
 
-## Intégrer SublimeAtlas à votre site NodeAtlas ##
+## Intégrer ComponentAtlas à votre site NodeAtlas ##
 
-Malgré le nombre de fichier dans cet exemple, le coeur même utile de SublimeAtlas pour vos propres sites node.js avec NodeAtlas se résume à un fichier et un appel.
+Malgré le nombre de fichier dans cet exemple, le coeur même utile de ComponentAtlas pour vos propres sites node.js avec NodeAtlas se résume à un fichier et un appel.
 
 ### Inclusion côté server ###
 
@@ -463,7 +463,7 @@ Il va falloir faire appel à une fonction provenant du fichier `components/contr
     publics.changeVariation = function (params, mainCallback) {
         var variation = params.variation,
             NA = params.NA;
-        
+
         variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA);
 
         mainCallback(variation);
@@ -528,7 +528,7 @@ Le site sera accessible ici :
 
 ### Overview ###
 
-SublimeAtlas allow us to manage a website or HTML assets with nested Components with thanks to [NodeAtlas](http://www.lesieur.name/nodeatlas/). The website can be struct by piece of component just with modification into variation files (`.json`) in real time (no restart).
+ComponentAtlas allow us to manage a website or HTML assets with nested Components with thanks to [NodeAtlas](http://www.lesieur.name/nodeatlas/). The website can be struct by piece of component just with modification into variation files (`.json`) in real time (no restart).
 
 1. Component are not include with `include('name-of-component.htm')` but placeholders of components are setted with `includeComponents('componentsPlaceholder')`.
 
@@ -573,7 +573,7 @@ We concluded quickly it will be cool :
 <% } %>
 ```
 
-It's a good idea also to allow us to include component into component and use this mechanism with [EditAtlas](https://github.com/Haeresis/EditAtlas/) ! It's the job of SublimeAtlas.
+It's a good idea also to allow us to include component into component and use this mechanism with [EditAtlas](https://github.com/Haeresis/EditAtlas/) ! It's the job of ComponentAtlas.
 
 
 ### Include Components into a Template ###
@@ -599,7 +599,7 @@ With the following `templates/home.htm` template:
             <footer>
                 <%- includeComponents('footerPlaceholder') %>
             </footer>
-        </div>      
+        </div>
     </body>
 </html>
 ```
@@ -615,7 +615,7 @@ and the following specific `variations/home.json` variation file:
             "variation": {
                 "title": "Title 1",
                 "content": "Content 1"
-            }       
+            }
         }, {
             "path": "name-of-component.htm",
             "variation": {
@@ -667,7 +667,7 @@ and the following `components/name-of-component.htm` component:
 we could manage a page. Note that redefine list of component into placeholders allow us to change the structure of final page. Each time of a page is requested, the variation file is re-parsed and no restart is required.
 
 
-### Include component from common variations ### 
+### Include component from common variations ###
 
 It's also possible to include components from common variation files `variations/common.js` for the components used on all or more one template.
 
@@ -692,7 +692,7 @@ with the following `templates/home.htm` template:
             <footer>
                 <%- includeComponents('footerPlaceholder', 'common') %>
             </footer>
-        </div>      
+        </div>
     </body>
 </html>
 ```
@@ -780,7 +780,7 @@ It's a good idea to allow us to automaticly transform `<section>` into component
 
 In this case, it's interesting to transform `<section>` in `<div>` because it will be injected into a `<header>` or a `<footer>`.
 
-The problem is double `<h1>` into `<header>`. The `<h1>` from template and the `<h1>` from component. SublimeAtlas allow you to resolve conflict in a simply way !
+The problem is double `<h1>` into `<header>`. The `<h1>` from template and the `<h1>` from component. ComponentAtlas allow you to resolve conflict in a simply way !
 
 You have maybe seen in `components/name-of-component.htm` component the `$` into the `<section>` tag and into the `<h1>` tag. And you have maybe seen a `mainTag` variable for each component from `variations/common.json` file.
 
@@ -789,19 +789,19 @@ This `$` are remove from final HTML render if no `mainTag` are found into variat
 
 That are the transformation:
 
-- If exist `<nav$>...</nav$>`, `<aside$>...</aside$>`, `<section$>...</section$>`, `<article$>...</article$>` or `<div$>...</div$>` tags, it will be replaced by the tag specify into `mainTag`. 
+- If exist `<nav$>...</nav$>`, `<aside$>...</aside$>`, `<section$>...</section$>`, `<article$>...</article$>` or `<div$>...</div$>` tags, it will be replaced by the tag specify into `mainTag`.
    *For example into our component: `<section$>...</section$>` become `<div>...</div>` because `mainTag` value is `div`.*
-   
+
 - If mainTag value is : `div`, `header` or `footer`, so all tags `<header$>...<header$>`, `<footer$>...</footer$>`, `<h1$>...</h1$>`, `<h2$>...</h2$>`, `<h3$>...</h3$>`, `<h4$>...</h4$>`, `<h5$>...</h5$>` or `<h6$>...</h6$>` will be respectively replaced by tags: `<div class="header-like" $>...<div>`, `<div class="footer-like" $>...</div>`, `<div class="h1-like">...</div>`, `<div class="h2-like">...</div>`, `<div class="h3-like">...</div>`, `<div class="h4-like">...</div>`, `<div class="h5-like">...</div>` or `<div class="h6-like">...</div>`.
 
 
 ### Include Components into Component ###
 
-It's possible to include nested components in components to realize every structure of pages you want. For this, pass the `component` variable when you include a component : `<%- includeComponents('componentsPlaceholder', component) %>`. 
+It's possible to include nested components in components to realize every structure of pages you want. For this, pass the `component` variable when you include a component : `<%- includeComponents('componentsPlaceholder', component) %>`.
 
 *Note : it's still possible to inject a component from the root of `specific` or `common` variation files with `<%- includeComponents('componentsPlaceholder') %>` or `<%- includeComponents('componentsPlaceholder', 'common') %>`.*
 
-For example : 
+For example :
 
 with the following `templates/home.htm` template:
 
@@ -816,7 +816,7 @@ with the following `templates/home.htm` template:
         <div class="layout">
             <h1><%- specific.titleOfPage %></h1>
             <%- includeComponents('root') %>
-        </div>      
+        </div>
     </body>
 </html>
 ```
@@ -836,7 +836,7 @@ and the following specific `variations/home.json` variation files:
                 "components": {
                     "item1": [{
                         "path": "name-of-component.htm",
-                        "variation": { 
+                        "variation": {
                             "mainTag": "nav"
                             "content": "Content Main Nav"
                         }
@@ -852,21 +852,21 @@ and the following specific `variations/home.json` variation files:
                 "components": {
                     "item1": [{
                         "path": "name-of-component.htm",
-                        "variation": { 
+                        "variation": {
                             "mainTag": "aside"
                             "title": "Title Ads 1"
                         }
                     }],
                     "item2": [{
                         "path": "name-of-component.htm",
-                        "variation": { 
+                        "variation": {
                             "mainTag": "div"
                             "content": "Main Content"
                         }
                     }],
                     "item3": [{
                         "path": "name-of-component.htm",
-                        "variation": { 
+                        "variation": {
                             "mainTag": "aside"
                             "title": "Title Ads 2"
                         }
@@ -889,7 +889,7 @@ and the following specific `variations/home.json` variation files:
                 "components": {
                     "item1": [{
                         "path": "name-of-component.htm",
-                        "variation": { 
+                        "variation": {
                             "mainTag": "nav"
                             "content": "Content Second Nav"
                         }
@@ -967,9 +967,9 @@ The `components/name-of-component.htm` component from previous example could be 
 
 
 
-## Embed SublimeAtlas to your NodeAtlas website ##
+## Embed ComponentAtlas to your NodeAtlas website ##
 
-Despite the number of file in this example, the SublimeAtlas core useful for your own websites with node.js is a one file and one calling.
+Despite the number of file in this example, the ComponentAtlas core useful for your own websites with node.js is a one file and one calling.
 
 ### Server Side Inclusion ###
 
@@ -982,7 +982,7 @@ The feature you will run could be find into the `components/controllers/sublime-
     publics.changeVariation = function (params, mainCallback) {
         var variation = params.variation,
             NA = params.NA;
-        
+
         variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA);
 
         mainCallback(variation);

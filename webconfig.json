@@ -6,7 +6,7 @@
 	"commonController": "common.js",
 	"commonVariation": "common.json",
 	"optimizations": {
-		"images": {	
+		"images": {
 			"media/images/*.{gif,jpg,png,svg}": "media/images/",
 			"media/images/en-gb/*.{gif,jpg,png,svg}": "media/images/en-gb/",
 			"media/images/it-it/*.{gif,jpg,png,svg}": "media/images/it-it/"

@@ -1,19 +1,19 @@
 {
-  "name": "sublime-atlas",
+  "name": "component-atlas",
   "version": "0.1.0",
   "author": "Bruno Lesieur <bruno.lesieur@gmail.com>",
   "description": "Exemple d'injection dynamique de Composants avec NodeAtlas.",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/Haeresis/SublimeAtlas.git"
+    "url": "https://github.com/Haeresis/ComponentAtlas.git"
   },
   "license": {
     "type": "GPLv2",
-    "url": "https://github.com/Haeresis/SublimeAtlas/LICENSE"
+    "url": "https://github.com/Haeresis/ComponentAtlas/LICENSE"
   },
   "bugs": {
-    "url": "https://github.com/Haeresis/SublimeAtlas/issues"
+    "url": "https://github.com/Haeresis/ComponentAtlas/issues"
   },
   "dependencies": {},
   "engines": {
