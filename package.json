@@ -1,6 +1,6 @@
 {
   "name": "component-atlas",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Bruno Lesieur <bruno.lesieur@gmail.com>",
   "description": "Exemple d'injection dynamique de Composants avec NodeAtlas.",
   "private": false,
