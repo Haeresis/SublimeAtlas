@@ -25,57 +25,57 @@
         	max-width: 100%;
         }
     }
-}
 
-.three-items--item {
-	.make-sm-column(4);
-    position: relative;
+    &--item {
+    	.make-sm-column(4);
+        position: relative;
 
-    &:nth-child(2):before,
-    &:nth-child(2):after {
-        content: "";
-        position: absolute;
-        background-repeat: no-repeat;
-        left: 0;
-        height: 4px;
-        width: 100%;
-        background-image: url('../media/images/separator.png');
-        -webkit-background-size: 100% 3px;
-             -o-background-size: 100% 3px;
-                background-size: 100% 3px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-
-    &:nth-child(2):before {
-        top: -10px;
-    }
-
-    &:nth-child(2):after {
-        bottom: -15px;
-    }
-
-    @media (min-width: @screen-tablet) {
         &:nth-child(2):before,
         &:nth-child(2):after {
-            padding: 0;
-            top: 0;
-            left: auto;
-            bottom: auto;
-            height: calc(~'100% - 10px');
-            width: 3px;
-            background-image: url('../media/images/vertical-separator.png');
-            -webkit-background-size: 3px 100%;
-                 -o-background-size: 3px 100%;
-                    background-size: 3px 100%;
+            content: "";
+            position: absolute;
+            background-repeat: no-repeat;
+            left: 0;
+            height: 4px;
+            width: 100%;
+            background-image: url('../media/images/separator.png');
+            -webkit-background-size: 100% 3px;
+                 -o-background-size: 100% 3px;
+                    background-size: 100% 3px;
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
 
         &:nth-child(2):before {
-            left: -1.5px;
+            top: -10px;
         }
 
         &:nth-child(2):after {
-            right: -1.5px;
+            bottom: -15px;
+        }
+
+        @media (min-width: @screen-tablet) {
+            &:nth-child(2):before,
+            &:nth-child(2):after {
+                padding: 0;
+                top: 0;
+                left: auto;
+                bottom: auto;
+                height: calc(~'100% - 10px');
+                width: 3px;
+                background-image: url('../media/images/vertical-separator.png');
+                -webkit-background-size: 3px 100%;
+                     -o-background-size: 3px 100%;
+                        background-size: 3px 100%;
+            }
+
+            &:nth-child(2):before {
+                left: -1.5px;
+            }
+
+            &:nth-child(2):after {
+                right: -1.5px;
+            }
         }
     }
 }

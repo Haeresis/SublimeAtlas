@@ -11,16 +11,37 @@ var website = {};
         return dom;
     };
 
+    publics.changeComponentName = function (dom, replacement) {
+        var componentName = dom.match(/class\$=("|')([-_\\.a-zA-Z0-9 ]*) ?/g);
+
+        if (componentName && !replacement) {
+            replacement = componentName[0].replace(/class\$=("|')/g, "").trim();
+        }
+
+        dom = dom
+            .replace(/class\$=/g, "class=")
+            .replace(/=("|')([-_\\.a-zA-Z0-9 ]*)(\$\$)([-_\\.a-zA-Z0-9 ]*)("|')/g, "=$1$2" + replacement + "$4$5");
+
+        if (replacement) {
+            replacement = replacement.split(" ")[0];
+        }
+
+        dom = dom
+            .replace(/=("|')([-_\\.a-zA-Z0-9 ]*)(\$)([-_\\.a-zA-Z0-9 ]*)("|')/g, "=$1$2" + replacement + "$4$5");
+
+        return dom;
+    };
+
     publics.changeHeaders = function (dom) {
         dom = dom
             .replace(/<(header|footer|h1|h2|h3|h4|h5|h6)\$/g, '<div class="$1-like"')
-            .replace(/<div class=(")(header|footer|h1|h2|h3|h4|h5|h6)-like(")(.+)(class=)('|")(.+)('|")/g, '<div class=$8$2-like $7$8')
+            .replace(/<div class=("|')(header|footer|h1|h2|h3|h4|h5|h6)-like("|')(.+)(class=)('|")(.+)('|")/g, '<div class=$8$2-like $7$8')
             .replace(/<\/(header|footer|h1|h2|h3|h4|h5|h6)\$>/g, "</div>");
 
         return dom;
     };
 
-    publics.changeSemantic = function (currentComponents, placeholder, i, activateSemantic, dom) {
+    publics.changeSemantic = function (currentComponents, placeholder, i, activateSemantic, activateComponentName, dom) {
         if (typeof activateSemantic === 'string' && currentComponents[placeholder][i].variation && currentComponents[placeholder][i].variation[activateSemantic]) {
             if (currentComponents[placeholder][i].variation[activateSemantic] === "div" ||
                currentComponents[placeholder][i].variation[activateSemantic] === "header"  ||
@@ -33,6 +54,7 @@ var website = {};
 
             dom = publics.changeSection(dom, currentComponents[placeholder][i].variation[activateSemantic]);
 
+            dom = publics.changeComponentName(dom, currentComponents[placeholder][i].variation[activateComponentName]);
         } else {
             dom = publics.ignoreHeaders(dom);
         }
@@ -68,7 +90,7 @@ var website = {};
         }
     };
 
-    publics.includeComponents = function (variation, componentVariation, activateSemantic) {
+    publics.includeComponents = function (variation, componentVariation, activateSemantic, activateComponentName) {
         var NA = this,
             ejs = NA.modules.ejs;
 
@@ -102,7 +124,7 @@ var website = {};
                         variation
                     );
 
-                    dom = publics.changeSemantic(currentComponents, placeholder, i, activateSemantic, dom);
+                    dom = publics.changeSemantic(currentComponents, placeholder, i, activateSemantic, activateComponentName, dom);
 
                     render = render + dom;
                 }

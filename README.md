@@ -1,6 +1,6 @@
 # ComponentAtlas #
 
-Version : 0.2 (Beta)
+Version : 0.3 (Beta)
 
 NodeAtlas Version minimale : 1.0
 
@@ -68,7 +68,7 @@ Avec le template `templates/home.htm` suivant :
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="utf-8">
     	<title><%- specific.titleOfPage %></title>
 	</head>
 	<body>
@@ -138,7 +138,7 @@ et le fichier de variation spécifique `variations/home.json` suivant :
 ainsi que le composant `components/name-of-component.htm` suivant :
 
 ```html
-<section class="name-of-component.htm">
+<section class="name-of-component">
     <div class="ui">
         <h1><%- component.title %></h1>
         <%- component.content %>
@@ -161,7 +161,7 @@ avec le template `templates/home.htm` suivant :
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
         <title><%- specific.titleOfPage %></title>
     </head>
     <body>
@@ -245,7 +245,7 @@ et le fichier de variation commune `variations/common.json` suivant :
 ainsi que le composant `components/name-of-component.htm` suivant :
 
 ```html
-<section$ class="name-of-component.htm">
+<section$ class="name-of-component">
     <div class="ui">
         <h1$><%- component.title %></h1$>
         <%- component.content %>
@@ -290,7 +290,7 @@ avec le template `templates/home.htm` suivant :
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
         <title><%- specific.titleOfPage %></title>
     </head>
     <body>
@@ -385,28 +385,28 @@ et le fichier de variation spécifique `variations/home.json` suivant :
 ainsi que le composant `components/name-of-component.htm` suivant :
 
 ```html
-<section$ class="name-of-component.htm">
+<section$ class="name-of-component">
   	<div class="ui">
 	  	<h1$><%- component.title %></h1$>
 	  	<%- component.content %>
 		<ul>
 			<% if (component && component.components && component.components['item1']) { %>
 			<li>
-				<div class="component-example--item">
+				<div class="name-of-component--item">
 					<%- includeComponents('item1', component) %>
 				</div>
 			</li>
 			<% } %>
 			<% if (component && component.components && component.components['item2']) { %>
 			<li>
-				<div class="component-example--item">
+				<div class="name-of-component--item">
 					<%- includeComponents('item2', component) %>
 				</div>
 			</li>
 			<% } %>
 			<% if (component && component.components && component.components['item3']) { %>
 			<li>
-				<div class="component-example--item">
+				<div class="name-of-component--item">
 					<%- includeComponents('item3', component) %>
 				</div>
 			</li>
@@ -423,7 +423,7 @@ Nous pouvons générer la page que nous souhaitons, avec les conténeurs souhait
 Le composant `components/name-of-component.htm` de notre exemple précédent aurait tout aussi bien pu être créer à l'aide d'une boucle pour gérer autant d'éléments que voulu comme suit :
 
 ```html
-<section$ class="name-of-component.htm">
+<section$ class="name-of-component">
     <div class="ui">
         <h1$><%- component.title %></h1$>
         <%- component.content %>
@@ -432,7 +432,7 @@ Le composant `components/name-of-component.htm` de notre exemple précédent aur
         <% for (var placeholder in component.components) { %>
             <% if (component.components.hasOwnProperty(placeholder)) { %>
             <li>
-                <div class="component-example--item">
+                <div class="name-of-component--item">
                     <%- includeComponents(placeholder, component, path) %>
                 </div>
             </li>
@@ -446,13 +446,134 @@ Le composant `components/name-of-component.htm` de notre exemple précédent aur
 
 
 
+### Raccourcis de Class pour nommage BEM ###
+
+Il est possible également d'identifier votre classe maître sur un composant à l'aide de `class$` pour ne plus avoir besoin de la réécrire dans les sous partie pour gagner en visibilité. Votre classe maître sera obligatoirement la première de la classe. Ensuite, pour réécrire la classe maître dans les sous parties, il faudra utiliser `$`. Imaginons l'exemple suivant :
+
+#### En dure ####
+
+```html
+<section class$="name-of-component and-other-class">
+    <div class="ui">
+        <div class="$--title">
+            <h1><%- component.title %></h1>
+        </div>
+        <div class="$--content">
+            <%- component.content.text %>
+        </div>
+        <div class="$--aside">
+            <%- component.content.aside %>
+        </div>
+    </div>
+</section>
+```
+
+avec ce Less:
+
+```css
+@componentName: e('.name-of-component');
+
+@{componentName} {
+    /* properties here */
+
+    &--title {
+        /* properties here */
+    }
+    &--content {
+        /* properties here */
+    }
+    &--aside {
+        /* properties here */
+    }
+
+    &.and-other-class {
+        /* variable properties here */
+
+        @{componentName} {
+            &--title {
+                /* variable properties here */
+            }
+            &--content {
+                /* variable properties here */
+            }
+            &--aside {
+                /* variable properties here */
+            }
+        }
+    }
+}
+```
+
+#### Via fichier de variation ####
+
+Il est également possible de prévoir l'injection d'une classe à partir du fichier de variation comme suit :
+
+```json
+{
+    "components": {
+        "mainPlaceholder": [{
+            "path": "name-of-component.htm",
+            "variation": {
+                "componentName": "name-of-component"
+            }
+        }]
+    }
+}
+```
+
+```html
+<section class="$ and-other-class">
+    <div class="ui">
+        <div class="$--title">
+            <h1><%- component.title %></h1>
+        </div>
+        <div class="$--content">
+            <%- component.content.text %>
+        </div>
+        <div class="$--aside">
+            <%- component.content.aside %>
+        </div>
+    </div>
+</section>
+```
+
+et même changer les classes de variation (ici `.and-other-class`) directement dans le fichier de variation en alimentant toutes les classes avec `$$` (seul la première classe sera ré-injectée dans les sous parties avec `$`).
+
+```json
+{
+    "components": {
+        "mainPlaceholder": [{
+            "path": "name-of-component.htm",
+            "variation": {
+                "componentName": "name-of-component and-other-class"
+            }
+        }]
+    }
+}
+
+```html
+<section class="$$">
+    <div class="ui">
+        <div class="$--title">
+            <h1><%- component.title %></h1>
+        </div>
+        <div class="$--content">
+            <%- component.content.text %>
+        </div>
+        <div class="$--aside">
+            <%- component.content.aside %>
+        </div>
+    </div>
+</section>
+```
 
 
-## Intégrer ComponentAtlas à votre site NodeAtlas ##
+
+### Intégrer ComponentAtlas à votre site NodeAtlas ###
 
 Malgré le nombre de fichier dans cet exemple, le coeur même utile de ComponentAtlas pour vos propres sites node.js avec NodeAtlas se résume à un fichier et un appel.
 
-### Inclusion côté server ###
+#### Inclusion côté server ####
 
 Il va falloir faire appel à une fonction provenant du fichier `components/controllers/sublime-atlas.js` dans votre controlleur commun pour permettre au moteur de template de reconnaître `includeComponents` comme dans cet exemple dans `controllers/common.js` :
 
@@ -464,7 +585,7 @@ Il va falloir faire appel à une fonction provenant du fichier `components/contr
         var variation = params.variation,
             NA = params.NA;
 
-        variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA);
+        variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA, "components", "mainTag", "componentName");
 
         mainCallback(variation);
     };
@@ -472,10 +593,10 @@ Il va falloir faire appel à une fonction provenant du fichier `components/contr
 }(website));
 ```
 
-Vous pouvez changer `mainTag` par une autre propriété la changeant lors de l'appel de la fonction et également mettre l'intégralité de vos composants ailleurs que dans `components`. Essayons par exemple `tag` et `placeholders` :
+Vous pouvez changer `mainTag` et `componentName` par une autre propriété les changeant lors de l'appel de la fonction et également mettre l'intégralité de vos composants ailleurs que dans `components`. Essayons par exemple `tag`, `name` et `placeholders` :
 
 ```js
-variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA, "placeholders", "tag");
+variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA, "placeholders", "tag", "name");
 ```
 
 
@@ -586,7 +707,7 @@ With the following `templates/home.htm` template:
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
         <title><%- specific.titleOfPage %></title>
     </head>
     <body>
@@ -656,7 +777,7 @@ and the following specific `variations/home.json` variation file:
 and the following `components/name-of-component.htm` component:
 
 ```html
-<section class="name-of-component.htm">
+<section class="name-of-component">
     <div class="ui">
         <h1><%- component.title %></h1>
         <%- component.content %>
@@ -679,7 +800,7 @@ with the following `templates/home.htm` template:
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
         <title><%- specific.titleOfPage %></title>
     </head>
     <body>
@@ -763,7 +884,7 @@ and the following `variations/common.json` common variation:
 and the following `components/name-of-component.htm` component:
 
 ```html
-<section$ class="name-of-component.htm">
+<section$ class="name-of-component">
     <div class="ui">
         <h1$><%- component.title %></h1$>
         <%- component.content %>
@@ -809,7 +930,7 @@ with the following `templates/home.htm` template:
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
         <title><%- specific.titleOfPage %></title>
     </head>
     <body>
@@ -904,28 +1025,28 @@ and the following specific `variations/home.json` variation files:
 and the following specific `components/name-of-component.htm` composant:
 
 ```html
-<section$ class="name-of-component.htm">
+<section$ class="name-of-component">
     <div class="ui">
         <h1$><%- component.title %></h1$>
         <%- component.content %>
         <ul>
             <% if (component && component.components && component.components['item1']) { %>
             <li>
-                <div class="component-example--item">
+                <div class="name-of-component--item">
                     <%- includeComponents('item1', component) %>
                 </div>
             </li>
             <% } %>
             <% if (component && component.components && component.components['item2']) { %>
             <li>
-                <div class="component-example--item">
+                <div class="name-of-component--item">
                     <%- includeComponents('item2', component) %>
                 </div>
             </li>
             <% } %>
             <% if (component && component.components && component.components['item3']) { %>
             <li>
-                <div class="component-example--item">
+                <div class="name-of-component--item">
                     <%- includeComponents('item3', component) %>
                 </div>
             </li>
@@ -942,7 +1063,7 @@ We can manage the page we want, with the desired containers and a perfect HTML5 
 The `components/name-of-component.htm` component from previous example could be a loop as following:
 
 ```html
-<section$ class="name-of-component.htm">
+<section$ class="name-of-component and-other-class">
     <div class="ui">
         <h1$><%- component.title %></h1$>
         <%- component.content %>
@@ -951,7 +1072,7 @@ The `components/name-of-component.htm` component from previous example could be 
         <% for (var placeholder in component.components) { %>
             <% if (component.components.hasOwnProperty(placeholder)) { %>
             <li>
-                <div class="component-example--item">
+                <div class="name-of-component--item">
                     <%- includeComponents(placeholder, component, path) %>
                 </div>
             </li>
@@ -965,13 +1086,134 @@ The `components/name-of-component.htm` component from previous example could be 
 
 
 
+### Class Shortcut for BEM naming ###
+
+It's also possible to identify your main class for component with `class$` to not rewrite severals time name on the subcomponent. Your main class will be necessary the first class. Then, to re-inject main class into a subcomponent, use `$`. Let's see the exemple below:
+
+#### Static ####
+
+```html
+<section class$="name-of-component and-other-class">
+    <div class="ui">
+        <div class="$--title">
+            <h1><%- component.title %></h1>
+        </div>
+        <div class="$--content">
+            <%- component.content.text %>
+        </div>
+        <div class="$--aside">
+            <%- component.content.aside %>
+        </div>
+    </div>
+</section>
+```
+
+with this Less:
+
+```css
+@componentName: e('.name-of-component');
+
+@{componentName} {
+    /* properties here */
+
+    &--title {
+        /* properties here */
+    }
+    &--content {
+        /* properties here */
+    }
+    &--aside {
+        /* properties here */
+    }
+
+    &.and-other-class {
+        /* variable properties here */
+
+        @{componentName} {
+            &--title {
+                /* variable properties here */
+            }
+            &--content {
+                /* variable properties here */
+            }
+            &--aside {
+                /* variable properties here */
+            }
+        }
+    }
+}
+```
+
+#### Variation file ####
+
+It's also possible to inject a class via variation file like this:
+
+```json
+{
+    "components": {
+        "mainPlaceholder": [{
+            "path": "name-of-component.htm",
+            "variation": {
+                "componentName": "name-of-component"
+            }
+        }]
+    }
+}
+```
+
+```html
+<section class="$ and-other-class">
+    <div class="ui">
+        <div class="$--title">
+            <h1><%- component.title %></h1>
+        </div>
+        <div class="$--content">
+            <%- component.content.text %>
+        </div>
+        <div class="$--aside">
+            <%- component.content.aside %>
+        </div>
+    </div>
+</section>
+```
+
+and also to change all classes (here `.and-other-class`) into the variation file to re-inject thew with `$$` (and also re-inject first class into subcomponent with `$`).
+
+```json
+{
+    "components": {
+        "mainPlaceholder": [{
+            "path": "name-of-component.htm",
+            "variation": {
+                "componentName": "name-of-component and-other-class"
+            }
+        }]
+    }
+}
+
+```html
+<section class="$$">
+    <div class="ui">
+        <div class="$--title">
+            <h1><%- component.title %></h1>
+        </div>
+        <div class="$--content">
+            <%- component.content.text %>
+        </div>
+        <div class="$--aside">
+            <%- component.content.aside %>
+        </div>
+    </div>
+</section>
+```
 
 
-## Embed ComponentAtlas to your NodeAtlas website ##
+
+### Embed ComponentAtlas to your NodeAtlas website ###
 
 Despite the number of file in this example, the ComponentAtlas core useful for your own websites with node.js is a one file and one calling.
 
-### Server Side Inclusion ###
+#### Server Side Inclusion ####
 
 The feature you will run could be find into the `components/controllers/sublime-atlas.js` file. Use it in your common controller as following:
 
@@ -983,7 +1225,7 @@ The feature you will run could be find into the `components/controllers/sublime-
         var variation = params.variation,
             NA = params.NA;
 
-        variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA);
+        variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA, "components", "mainTag", "componentName");
 
         mainCallback(variation);
     };
@@ -991,10 +1233,10 @@ The feature you will run could be find into the `components/controllers/sublime-
 }(website));
 ```
 
-You can change `mainTag` with other value when you call the function and also set your component into a `components` parameter different. See this example with `tag` and `placeholders`:
+You can change `mainTag` and `componentName` with other value when you call the function and also set your component into a `components` parameter different. See this example with `tag`, `name` and `placeholders`:
 
 ```js
-variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA, "placeholders", "tag");
+variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA, "placeholders", "tag", "name");
 ```
 
 

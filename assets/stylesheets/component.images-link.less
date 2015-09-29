@@ -1,28 +1,29 @@
 ﻿.images-link {
     padding-top: 15px;
     .ui {
-        .container;   
+        .container;
     }
-}
-.images-link--links {
-	ul {	
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-	}
-	
-	li {
-		.make-sm-column(3);
-		padding-top: 8px;
-		padding-bottom: 8px;
-		text-align: center;
-		
-		img {
-			max-width: 100%;
+
+	&--links {
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
 		}
-	}
-	@media (min-width: @screen-tablet) {
-		.make-xs-column-offset(2);
+
+		li {
+			.make-sm-column(3);
+			padding-top: 8px;
+			padding-bottom: 8px;
+			text-align: center;
+
+			img {
+				max-width: 100%;
+			}
+		}
+		@media (min-width: @screen-tablet) {
+			.make-xs-column-offset(2);
+		}
 	}
 }
 

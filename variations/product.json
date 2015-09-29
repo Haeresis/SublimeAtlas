@@ -16,7 +16,8 @@
 		"main" : [{
 			"path": "templates/additional-menu.htm",
 			"variation": {
-				"mainTag": "nav"
+				"mainTag": "nav",
+				"componentName": "additional-menu as-variation"
 			}
 		}, {
 			"path": "templates/title.htm",
@@ -80,7 +81,8 @@
 		}, {
 			"path": "templates/footer.htm",
 			"variation": {
-				"mainTag": "footer"
+				"mainTag": "footer",
+				"componentName": "footer-main"
 			}
 		}]
 	}

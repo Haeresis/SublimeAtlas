@@ -10,7 +10,7 @@ website.components = {};
         var NA = this,
             variation = params.variation;
 
-        variation = website.components.comopnentAtlas.includeComponents.call(NA, variation, "components", "mainTag");
+        variation = website.components.comopnentAtlas.includeComponents.call(NA, variation, "components", "mainTag", "componentName");
 
         mainCallback(variation);
     };

@@ -3,30 +3,30 @@
         .container;
         padding: 0;
         position: relative;
-        z-index: 5;  
+        z-index: 5;
     }
-}
 
-.additional-menu--links {
-	position: absolute;
-	top: 8px;
-	right: 8px;
-    
-    ul {
-    	margin: 0;
-    	padding: 0;
-    	list-style-type: none;
+    &--links {
+    	position: absolute;
+    	top: 8px;
+    	right: 8px;
+
+        ul {
+        	margin: 0;
+        	padding: 0;
+        	list-style-type: none;
+        }
+
+    	width: 48px;
+    	img {
+    		max-width: 100%;
+    	}
+    	@media (min-width: @screen-tablet) {
+    		left: 8px;
+    		top: 180px;
+    		bottom: auto;
+            right: auto;
+            width: auto;
+    	}
     }
-    
-	width: 48px;
-	img {
-		max-width: 100%;
-	}
-	@media (min-width: @screen-tablet) {
-		left: 8px;
-		top: 180px;
-		bottom: auto;
-        right: auto;
-        width: auto;
-	}
 }
