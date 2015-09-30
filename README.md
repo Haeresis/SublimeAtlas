@@ -510,13 +510,13 @@ pour rendre la sortie suivante
 <section class="name-of-component and-other-class">
     <div class="ui">
         <div class="name-of-component--title">
-            <h1><%- component.title %></h1>
+            <h1>Title</h1>
         </div>
         <div class="name-of-component--content">
-            <%- component.content.text %>
+            Text
         </div>
         <div class="name-of-component--aside">
-            <%- component.content.aside %>
+            Aside
         </div>
     </div>
 </section>
@@ -532,7 +532,12 @@ Il est également possible de prévoir l'injection d'une classe à partir du fic
         "placeholder": [{
             "path": "name-of-component.htm",
             "variation": {
-                "componentName": "name-of-component"
+                "componentName": "name-of-component",
+                "title": "Title",
+                "content": {
+                    "text": "Text",
+                    "aside": "Aside"
+                }
             }
         }]
     }
@@ -563,7 +568,12 @@ et même changer les classes de variation (ici `.and-other-class`) directement d
         "placeholder": [{
             "path": "name-of-component.htm",
             "variation": {
-                "componentName": "name-of-component and-other-class"
+                "componentName": "name-of-component and-other-class",
+                "title": "Title",
+                "content": {
+                    "text": "Text",
+                    "aside": "Aside"
+                }
             }
         }]
     }
@@ -1169,13 +1179,13 @@ to obtain this output:
 <section class="name-of-component and-other-class">
     <div class="ui">
         <div class="name-of-component--title">
-            <h1><%- component.title %></h1>
+            <h1>Title</h1>
         </div>
         <div class="name-of-component--content">
-            <%- component.content.text %>
+            Text
         </div>
         <div class="name-of-component--aside">
-            <%- component.content.aside %>
+            Aside
         </div>
     </div>
 </section>
@@ -1191,7 +1201,12 @@ It's also possible to inject a class via variation file like this:
         "placeholder": [{
             "path": "name-of-component.htm",
             "variation": {
-                "componentName": "name-of-component"
+                "componentName": "name-of-component",
+                "title": "Title",
+                "content": {
+                    "text": "Text",
+                    "aside": "Aside"
+                }
             }
         }]
     }
@@ -1222,7 +1237,12 @@ and also to change all classes (here `.and-other-class`) into the variation file
         "placeholder": [{
             "path": "name-of-component.htm",
             "variation": {
-                "componentName": "name-of-component and-other-class"
+                "componentName": "name-of-component and-other-class",
+                "title": "Title",
+                "content": {
+                    "text": "Text",
+                    "aside": "Aside"
+                }
             }
         }]
     }
