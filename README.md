@@ -504,6 +504,24 @@ avec ce Less:
 }
 ```
 
+pour rendre la sortie suivante
+
+```html
+<section class="name-of-component and-other-class">
+    <div class="ui">
+        <div class="name-of-component--title">
+            <h1><%- component.title %></h1>
+        </div>
+        <div class="name-of-component--content">
+            <%- component.content.text %>
+        </div>
+        <div class="name-of-component--aside">
+            <%- component.content.aside %>
+        </div>
+    </div>
+</section>
+```
+
 #### Via fichier de variation ####
 
 Il est également possible de prévoir l'injection d'une classe à partir du fichier de variation comme suit :
@@ -511,7 +529,7 @@ Il est également possible de prévoir l'injection d'une classe à partir du fic
 ```json
 {
     "components": {
-        "mainPlaceholder": [{
+        "placeholder": [{
             "path": "name-of-component.htm",
             "variation": {
                 "componentName": "name-of-component"
@@ -542,7 +560,7 @@ et même changer les classes de variation (ici `.and-other-class`) directement d
 ```json
 {
     "components": {
-        "mainPlaceholder": [{
+        "placeholder": [{
             "path": "name-of-component.htm",
             "variation": {
                 "componentName": "name-of-component and-other-class"
@@ -550,6 +568,7 @@ et même changer les classes de variation (ici `.and-other-class`) directement d
         }]
     }
 }
+```
 
 ```html
 <section class="$$">
@@ -1144,6 +1163,24 @@ with this Less:
 }
 ```
 
+to obtain this output:
+
+```html
+<section class="name-of-component and-other-class">
+    <div class="ui">
+        <div class="name-of-component--title">
+            <h1><%- component.title %></h1>
+        </div>
+        <div class="name-of-component--content">
+            <%- component.content.text %>
+        </div>
+        <div class="name-of-component--aside">
+            <%- component.content.aside %>
+        </div>
+    </div>
+</section>
+```
+
 #### Variation file ####
 
 It's also possible to inject a class via variation file like this:
@@ -1151,7 +1188,7 @@ It's also possible to inject a class via variation file like this:
 ```json
 {
     "components": {
-        "mainPlaceholder": [{
+        "placeholder": [{
             "path": "name-of-component.htm",
             "variation": {
                 "componentName": "name-of-component"
@@ -1182,7 +1219,7 @@ and also to change all classes (here `.and-other-class`) into the variation file
 ```json
 {
     "components": {
-        "mainPlaceholder": [{
+        "placeholder": [{
             "path": "name-of-component.htm",
             "variation": {
                 "componentName": "name-of-component and-other-class"
@@ -1190,6 +1227,7 @@ and also to change all classes (here `.and-other-class`) into the variation file
         }]
     }
 }
+```
 
 ```html
 <section class="$$">
