@@ -1,6 +1,6 @@
 # ComponentAtlas #
 
-Version : 0.3 (Beta)
+Version : 0.4 (Beta)
 
 NodeAtlas Version minimale : 1.0
 
@@ -433,7 +433,7 @@ Le composant `components/name-of-component.htm` de notre exemple précédent aur
             <% if (component.components.hasOwnProperty(placeholder)) { %>
             <li>
                 <div class="name-of-component--item">
-                    <%- includeComponents(placeholder, component, path) %>
+                    <%- includeComponents('placeholder', component, path) %>
                 </div>
             </li>
             <% } %>
@@ -596,6 +596,34 @@ et même changer les classes de variation (ici `.and-other-class`) directement d
 </section>
 ```
 
+
+
+### AJAX / Websocket ###
+
+Il est également possible de profiter d'appel après chargement pour mettre à jour une portion de page avec un fragment de composant. Voyez par exemple l'exemple ci-dessous.
+
+```js
+var /* Data from AJAX or Websocket Request
+    dataEmit = {
+        "lang": "fr-fr",
+        "variation": "specific.json"
+    },*/
+    currentVariation = {},
+    render;
+
+/* Asynchrone render of template and variations */
+currentVariation = NA.addSpecificVariation(dataEmit.variation, dataEmit.lang, currentVariation);
+currentVariation = NA.addCommonVariation(dataEmit.lang, currentVariation);
+
+/* Asynchrone addon for componentAtlas render */
+render = require(''../components/controllers/component-atlas').includeComponent.call(NA,
+    /* component */ currentVariation.specific.components.content[2],
+    /* path */ 'specific.components.content[2]', currentVariation
+);
+
+/* Result */
+console.log(render);
+```
 
 
 ### Intégrer ComponentAtlas à votre site NodeAtlas ###
@@ -1102,7 +1130,7 @@ The `components/name-of-component.htm` component from previous example could be 
             <% if (component.components.hasOwnProperty(placeholder)) { %>
             <li>
                 <div class="name-of-component--item">
-                    <%- includeComponents(placeholder, component, path) %>
+                    <%- includeComponents('placeholder', component, path) %>
                 </div>
             </li>
             <% } %>
@@ -1265,6 +1293,34 @@ and also to change all classes (here `.and-other-class`) into the variation file
 </section>
 ```
 
+
+
+### AJAX / Websocket ###
+
+It's also possible to call a component after render with AJAX or Wesocket request. See example below.
+
+```js
+var /* Data from AJAX or Websocket Request
+    dataEmit = {
+        "lang": "fr-fr",
+        "variation": "specific.json"
+    },*/
+    currentVariation = {},
+    render;
+
+/* Asynchrone render of template and variations */
+currentVariation = NA.addSpecificVariation(dataEmit.variation, dataEmit.lang, currentVariation);
+currentVariation = NA.addCommonVariation(dataEmit.lang, currentVariation);
+
+/* Asynchrone addon for componentAtlas render */
+render = require(''../components/controllers/component-atlas').includeComponent.call(NA,
+    /* component */ currentVariation.specific.components.content[2],
+    /* path */ 'specific.components.content[2]', currentVariation
+);
+
+/* Result */
+console.log(render);
+```
 
 
 ### Embed ComponentAtlas to your NodeAtlas website ###

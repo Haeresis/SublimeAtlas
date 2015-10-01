@@ -3,6 +3,8 @@ var website = {};
 
 (function (publics) {
 
+    var privates = {};
+
     publics.changeSection = function (dom, replacement) {
         dom = dom
             .replace(/<(template|div|nav|aside|article|section)\$/g, "<" + replacement)
@@ -16,6 +18,8 @@ var website = {};
 
         if (componentName && !replacement) {
             replacement = componentName[0].replace(/class\$=("|')/g, "").trim();
+        } else if (!componentName && !replacement) {
+            replacement = "";
         }
 
         dom = dom
@@ -41,22 +45,28 @@ var website = {};
         return dom;
     };
 
-    publics.changeSemantic = function (currentComponents, placeholder, i, activateSemantic, activateComponentName, dom) {
-        if (typeof activateSemantic === 'string' && currentComponents[placeholder][i].variation && currentComponents[placeholder][i].variation[activateSemantic]) {
-            if (currentComponents[placeholder][i].variation[activateSemantic] === "div" ||
-               currentComponents[placeholder][i].variation[activateSemantic] === "header"  ||
-               currentComponents[placeholder][i].variation[activateSemantic] === "footer")
+    publics.changeSemantic = function (component, activateSemantic, activateComponentName, dom) {
+        if (typeof activateSemantic === 'string' && component.variation && component.variation[activateSemantic]) {
+            if (component.variation[activateSemantic] === "div" ||
+               component.variation[activateSemantic] === "header"  ||
+               component.variation[activateSemantic] === "footer")
             {
                 dom = publics.changeHeaders(dom);
             } else {
                 dom = publics.ignoreHeaders(dom);
             }
 
-            dom = publics.changeSection(dom, currentComponents[placeholder][i].variation[activateSemantic]);
-
-            dom = publics.changeComponentName(dom, currentComponents[placeholder][i].variation[activateComponentName]);
+            dom = publics.changeSection(dom, component.variation[activateSemantic]);
         } else {
             dom = publics.ignoreHeaders(dom);
+        }
+
+        if (typeof activateComponentName === 'string') {
+            if (component.variation && component.variation[activateComponentName]) {
+                dom = publics.changeComponentName(dom, component.variation[activateComponentName]);
+            } else {
+                dom = publics.changeComponentName(dom, undefined);
+            }
         }
 
         return dom;
@@ -90,6 +100,21 @@ var website = {};
         }
     };
 
+    publics.includeComponent = function (component, path, variation) {
+        var NA = this,
+            dom = "",
+            ejs = NA.modules.ejs;
+
+        dom = ejs.render(
+            '<%- include("' + component.path + '", { component: ' + JSON.stringify(component.variation) + ', path: "' + path + '" }) %>',
+            variation
+        );
+
+        dom = publics.changeSemantic(component, privates.activateSemantic, privates.activateComponentName, dom);
+
+        return dom;
+    };
+
     publics.includeComponents = function (variation, componentVariation, activateSemantic, activateComponentName) {
         var NA = this,
             ejs = NA.modules.ejs;
@@ -100,6 +125,9 @@ var website = {};
                 currentVariation,
                 currentPath,
                 dom = "";
+
+            privates.activateSemantic = activateSemantic;
+            privates.activateComponentName = activateComponentName;
 
             if (!componentVariation) {
                 componentVariation = "components";
@@ -124,7 +152,7 @@ var website = {};
                         variation
                     );
 
-                    dom = publics.changeSemantic(currentComponents, placeholder, i, activateSemantic, activateComponentName, dom);
+                    dom = publics.changeSemantic(currentComponents[placeholder][i], activateSemantic, activateComponentName, dom);
 
                     render = render + dom;
                 }
@@ -141,3 +169,4 @@ var website = {};
 }(website));
 
 exports.includeComponents = website.includeComponents;
+exports.includeComponent = website.includeComponent;
