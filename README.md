@@ -686,7 +686,7 @@ Déplacez vous ensuite dans le dossier :
 et utilisez la commande :
 
 ```
-\> node </path/to/>node-atlas/node-atlas.js --browse
+\> node </path/to/>node-atlas/ --browse
 ```
 
 ou lancez `server.na` en double cliquant dessus :
@@ -1383,7 +1383,7 @@ Then you move into the folder:
 and use the command:
 
 ```
-\> node </path/to/>node-atlas/node-atlas.js --browse
+\> node </path/to/>node-atlas/ --browse
 ```
 
 or run `server.na` by double clicking and:
