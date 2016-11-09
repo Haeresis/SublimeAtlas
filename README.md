@@ -10,7 +10,7 @@ NodeAtlas Version minimale : 1.0
 
 ## Avant-propos ##
 
-ComponentAtlas permet la construction de site ou maquette HTML par empilement de Composant (Component) avec [NodeAtlas](http://www.lesieur.name/nodeatlas/). Le site peut alors être construit par brique uniquement par modifications des fichiers de variations (`.json`) et le tout en temps réel (sans redémarrage).
+ComponentAtlas permet la construction de site ou maquette HTML par empilement de Composant (Component) avec [NodeAtlas](https://www.lesieur.name/nodeatlas/). Le site peut alors être construit par brique uniquement par modifications des fichiers de variations (`.json`) et le tout en temps réel (sans redémarrage).
 
 1. On n'inclut plus de composant avec `include('name-of-component.htm')` mais on défini des zones d’atterrissage de composants avec `includeComponents('componentsPlaceholder')`.
 
@@ -24,13 +24,13 @@ ComponentAtlas permet la construction de site ou maquette HTML par empilement de
 
 6. Complètement compatible avec [EditAtlas](https://github.com/Haeresis/EditAtlas/) pour éditer à chaud l'arborescence des composants et modifier en temps réel la structure même d'une page web.
 
-Vous pouvez télécharger ce repository en vu de le tester ou de l'intégrer à l'un de vos projets [NodeAtlas](http://www.lesieur.name/nodeatlas/) ou node.js.
+Vous pouvez télécharger ce repository en vu de le tester ou de l'intégrer à l'un de vos projets [NodeAtlas](https://www.lesieur.name/nodeatlas/) ou node.js.
 
 
 
 ## Comment ça marche ? ##
 
-[NodeAtlas](http://www.lesieur.name/nodeatlas/) utilise un système d'inclusion permettant d'intégrer des fragments de HTML pour rendre vos constructions plus facilement maintenables.
+[NodeAtlas](https://www.lesieur.name/nodeatlas/) utilise un système d'inclusion permettant d'intégrer des fragments de HTML pour rendre vos constructions plus facilement maintenables.
 
 Le problème est que la fonction `include` impose de poser en dur dans le code le chemin du fragment HTML utilisé :
 
@@ -674,7 +674,7 @@ Vous trouverez des exemples d'utilisation sur le [repository de EditAtlas](https
 
 ## Lancer ce repository en local ##
 
-Pour faire tourner le site en local, il vous faudra installer [NodeAtlas](http://www.lesieur.name/node-atlas/) sur votre poste de développement.
+Pour faire tourner le site en local, il vous faudra installer [NodeAtlas](https://www.lesieur.name/node-atlas/) sur votre poste de développement.
 
 Déplacez vous ensuite dans le dossier :
 
@@ -706,7 +706,7 @@ Le site sera accessible ici :
 
 ### Overview ###
 
-ComponentAtlas allow us to manage a website or HTML assets with nested Components with thanks to [NodeAtlas](http://www.lesieur.name/nodeatlas/). The website can be struct by piece of component just with modification into variation files (`.json`) in real time (no restart).
+ComponentAtlas allow us to manage a website or HTML assets with nested Components with thanks to [NodeAtlas](https://www.lesieur.name/nodeatlas/). The website can be struct by piece of component just with modification into variation files (`.json`) in real time (no restart).
 
 1. Component are not include with `include('name-of-component.htm')` but placeholders of components are setted with `includeComponents('componentsPlaceholder')`.
 
@@ -720,13 +720,13 @@ ComponentAtlas allow us to manage a website or HTML assets with nested Component
 
 6. Full compatibility with [EditAtlas](https://github.com/Haeresis/EditAtlas/) for edit in real time the components tree for modify the structure of page.
 
-You can download this repository to test it or integrate it with any of your [NodeAtlas](http://www.lesieur.name/nodeatlas/) on node.js projects.
+You can download this repository to test it or integrate it with any of your [NodeAtlas](https://www.lesieur.name/nodeatlas/) on node.js projects.
 
 
 
 ## How does it work ##
 
-[NodeAtlas](http://www.lesieur.name/nodeatlas/) use an inclusion mechanism can be HTML parts to allow us to change easily your website structure.
+[NodeAtlas](https://www.lesieur.name/nodeatlas/) use an inclusion mechanism can be HTML parts to allow us to change easily your website structure.
 
 The problem with `include` function is the path of file included is setted in hard way:
 
@@ -1371,7 +1371,7 @@ You find utilisation example on the [EditAtlas repository](https://github.com/Ha
 
 ## Run the website in local server ##
 
-To run the website in local, you must install [NodeAtlas](http://www.lesieur.name/node-atlas/) on your development machine.
+To run the website in local, you must install [NodeAtlas](https://www.lesieur.name/node-atlas/) on your development machine.
 
 Then you move into the folder:
 
