@@ -2,7 +2,8 @@
 
 Version : 0.4 (Beta)
 
-NodeAtlas Version minimale : 1.0
+NodeAtlas Version minimale : 2.0.x
+NodeAtlas Template Engine : Atlas, EJS (<? ?>)
 
 **For an international version of this README.md, [see below](#international-version).**
 
@@ -10,7 +11,7 @@ NodeAtlas Version minimale : 1.0
 
 ## Avant-propos ##
 
-ComponentAtlas permet la construction de site ou maquette HTML par empilement de Composant (Component) avec [NodeAtlas](https://www.lesieur.name/nodeatlas/). Le site peut alors être construit par brique uniquement par modifications des fichiers de variations (`.json`) et le tout en temps réel (sans redémarrage).
+ComponentAtlas permet la construction de site ou maquette HTML par empilement de Composant (Component) avec [NodeAtlas](https://node-atlas.js.org/). Le site peut alors être construit par brique uniquement par modifications des fichiers de variations (`.json`) et le tout en temps réel (sans redémarrage).
 
 1. On n'inclut plus de composant avec `include('name-of-component.htm')` mais on défini des zones d’atterrissage de composants avec `includeComponents('componentsPlaceholder')`.
 
@@ -24,24 +25,24 @@ ComponentAtlas permet la construction de site ou maquette HTML par empilement de
 
 6. Complètement compatible avec [EditAtlas](https://github.com/Haeresis/EditAtlas/) pour éditer à chaud l'arborescence des composants et modifier en temps réel la structure même d'une page web.
 
-Vous pouvez télécharger ce repository en vu de le tester ou de l'intégrer à l'un de vos projets [NodeAtlas](https://www.lesieur.name/nodeatlas/) ou node.js.
+Vous pouvez télécharger ce repository en vu de le tester ou de l'intégrer à l'un de vos projets [NodeAtlas](https://node-atlas.js.org/) ou node.js.
 
 
 
 ## Comment ça marche ? ##
 
-[NodeAtlas](https://www.lesieur.name/nodeatlas/) utilise un système d'inclusion permettant d'intégrer des fragments de HTML pour rendre vos constructions plus facilement maintenables.
+[NodeAtlas](https://node-atlas.js.org) utilise un système d'inclusion permettant d'intégrer des fragments de HTML pour rendre vos constructions plus facilement maintenables.
 
 Le problème est que la fonction `include` impose de poser en dur dans le code le chemin du fragment HTML utilisé :
 
 ```html
-<%- include("name-of-component.htm") %>
+<?- include("name-of-component.htm") ?>
 ```
 
 Bien entendu, avec un peu d'astuce, il suffit de mettre ce chemin dans un fichier de variation pour rendre « dynamique » l'injection de composant :
 
 ```html
-<%- include(specific.nameOfComponent) %>
+<?- include(specific.nameOfComponent) ?>
 ```
 
 On arrive rapidement à la conclusion qu'il serait agréable :
@@ -50,9 +51,9 @@ On arrive rapidement à la conclusion qu'il serait agréable :
 - de pouvoir gérer les variables de chaque composant dans son propre scope permettant d'inclure un composant plusieurs fois avec ses propres variations.
 
 ```html
-<% for (var i = 0; i < specific.component['firstComponentsPlaceholder'].length; i++) { %>
-	<%- include(specific.component['firstComponentsPlaceholder'][i].nameOfComponent.path, specific.component['firstComponentsPlaceholder'][i].nameOfComponent.variation) %>
-<% } %>
+<? for (var i = 0; i < specific.component['firstComponentsPlaceholder'].length; i++) { ?>
+	<?- include(specific.component['firstComponentsPlaceholder'][i].nameOfComponent.path, specific.component['firstComponentsPlaceholder'][i].nameOfComponent.variation) ?>
+<? } ?>
 ```
 
 On aimerait même pouvoir inclure des composants dans des composants et rendre ça compatible avec [EditAtlas](https://github.com/Haeresis/EditAtlas/) ! C'est ce que fait ComponentAtlas.
@@ -62,24 +63,24 @@ On aimerait même pouvoir inclure des composants dans des composants et rendre �
 
 Cela se réalise avec `includeComponents('componentsPlaceholder')`. Par exemple :
 
-Avec le template `templates/home.htm` suivant :
+Avec la view `views/home.htm` suivant :
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-    	<title><%- specific.titleOfPage %></title>
+    	<title><?- specific.titleOfPage ?></title>
 	</head>
 	<body>
 		<div class="layout">
-			<h1><%- specific.titleOfPage %></h1>
+			<h1><?- specific.titleOfPage ?></h1>
 			<header>
-				<%- includeComponents('headerPlaceholder') %>
+				<?- includeComponents('headerPlaceholder') ?>
 			</header>
-			<%- includeComponents('mainPlaceholder') %>
+			<?- includeComponents('mainPlaceholder') ?>
 			<footer>
-				<%- includeComponents('footerPlaceholder') %>
+				<?- includeComponents('footerPlaceholder') ?>
 			</footer>
 		</div>
 	</body>
@@ -93,39 +94,39 @@ et le fichier de variation spécifique `variations/home.json` suivant :
 	"titleOfPage": "Title of the Page",
     "components": {
         "headerPlaceholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 1",
                 "content": "Content 1"
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 2",
                 "content": "Content 2"
             }
         }],
         "mainPlaceholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 3",
                 "content": "Content 3"
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 4",
                 "content": "Content 4"
             }
         }],
         "footerPlaceholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 5",
                 "content": "Content 5"
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 6",
                 "content": "Content 6"
@@ -135,13 +136,13 @@ et le fichier de variation spécifique `variations/home.json` suivant :
 }
 ```
 
-ainsi que le composant `components/name-of-component.htm` suivant :
+ainsi que le composant `views/partials/name-of-component.htm` suivant :
 
 ```html
 <section class="name-of-component">
     <div class="ui">
-        <h1><%- component.title %></h1>
-        <%- component.content %>
+        <h1><?- component.title ?></h1>
+        <?- component.content ?>
     </div>
 </section>
 ```
@@ -155,24 +156,24 @@ Il est également possible de mettre les composants se retrouvant sur chaque pag
 
 Il suffit de placer en second paramètre le mot clé `common` : `includeComponents('componentsPlaceholder', 'common')`. Par exemple :
 
-avec le template `templates/home.htm` suivant :
+avec la view `views/home.htm` suivant :
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
     <head>
     <meta charset="utf-8">
-        <title><%- specific.titleOfPage %></title>
+        <title><?- specific.titleOfPage ?></title>
     </head>
     <body>
         <div class="layout">
-            <h1><%- specific.titleOfPage %></h1>
+            <h1><?- specific.titleOfPage ?></h1>
             <header>
-                <%- includeComponents('headerPlaceholder', 'common') %>
+                <?- includeComponents('headerPlaceholder', 'common') ?>
             </header>
-            <%- includeComponents('mainPlaceholder') %>
+            <?- includeComponents('mainPlaceholder') ?>
             <footer>
-                <%- includeComponents('footerPlaceholder', 'common') %>
+                <?- includeComponents('footerPlaceholder', 'common') ?>
             </footer>
         </div>
     </body>
@@ -186,13 +187,13 @@ et le fichier de variation spécifique `variations/home.json` suivant :
     "titleOfPage": "Title of the Page",
     "components": {
         "mainPlaceholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 3",
                 "content": "Content 3"
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 4",
                 "content": "Content 4"
@@ -209,14 +210,14 @@ et le fichier de variation commune `variations/common.json` suivant :
     "titleOfPage": "Title of the Page",
     "components": {
         "headerPlaceholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "div",
                 "title": "Title 1",
                 "content": "Content 1"
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "div",
                 "title": "Title 2",
@@ -224,14 +225,14 @@ et le fichier de variation commune `variations/common.json` suivant :
             }
         }],
         "footerPlaceholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "div",
                 "title": "Title 5",
                 "content": "Content 5"
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "div",
                 "title": "Title 6",
@@ -242,13 +243,13 @@ et le fichier de variation commune `variations/common.json` suivant :
 }
 ```
 
-ainsi que le composant `components/name-of-component.htm` suivant :
+ainsi que le composant `views/partials/name-of-component.htm` suivant :
 
 ```html
 <section$ class="name-of-component">
     <div class="ui">
-        <h1$><%- component.title %></h1$>
-        <%- component.content %>
+        <h1$><?- component.title ?></h1$>
+        <?- component.content ?>
     </div>
 </section$>
 ```
@@ -264,7 +265,7 @@ Dans notre cas, il serait interessant d'avoir une simple `<div>` pour les compos
 
 Le problème c'est qu'en faisant ça, vous aurez dans le `<header>` le `<h1>` principal mais également le `<h1>` du composant qui ne serait plus isolé dans une `<section>` devenue une `<div>`. Et bien ComponentAtlas peut gérer simplement tout cela !
 
-Vous aurez remarqué que le composant `components/name-of-component.htm` possède des `$` sur les balises `<section>` et sur la balise `<h1>`. Et qu'il y a une variable `mainTag` pour chaque composant du fichier `variations/common.json`.
+Vous aurez remarqué que le composant `views/partials/name-of-component.htm` possède des `$` sur les balises `<section>` et sur la balise `<h1>`. Et qu'il y a une variable `mainTag` pour chaque composant du fichier `variations/common.json`.
 
 Ces `$` sont retirés lors de la génération HTML finale s'il n'existe pas de `mainTag` en variation pour le composant. Cependant en fonction du `mainTag` utilisé, plusieurs transformations seront opérées.
 
@@ -278,25 +279,25 @@ En voici les cas :
 
 ### Inclure des Composants dans un Composant ###
 
-Il est possible d'inclure en cascade des composants dans des composants de manière à pouvoir réaliser n'importe quelle page avec une cascade de n'importe quelles composants ou liste de composants. Il suffit en plus de passer la variable `component` : `<%- includeComponents('componentsPlaceholder', component) %>`.
+Il est possible d'inclure en cascade des composants dans des composants de manière à pouvoir réaliser n'importe quelle page avec une cascade de n'importe quelles composants ou liste de composants. Il suffit en plus de passer la variable `component` : `<?- includeComponents('componentsPlaceholder', component) ?>`.
 
-*Note : il est toujours possible dans un composant d'injecter un composant depuis la racine des variations `specific` ou `common` avec `<%- includeComponents('componentsPlaceholder') %>` ou `<%- includeComponents('componentsPlaceholder', 'common') %>`.*
+*Note : il est toujours possible dans un composant d'injecter un composant depuis la racine des variations `specific` ou `common` avec `<?- includeComponents('componentsPlaceholder') ?>` ou `<?- includeComponents('componentsPlaceholder', 'common') ?>`.*
 
 Par exemple :
 
-avec le template `templates/home.htm` suivant :
+avec la view `views/home.htm` suivant :
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title><%- specific.titleOfPage %></title>
+        <title><?- specific.titleOfPage ?></title>
     </head>
     <body>
         <div class="layout">
-            <h1><%- specific.titleOfPage %></h1>
-            <%- includeComponents('root') %>
+            <h1><?- specific.titleOfPage ?></h1>
+            <?- includeComponents('root') ?>
         </div>
     </body>
 </html>
@@ -309,14 +310,14 @@ et le fichier de variation spécifique `variations/home.json` suivant :
     "titleOfPage": "Title of the Page",
     "components": {
         "root": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "header",
                 "title": "Title Header",
                 "content": "Content Header",
                 "components": {
                     "item1": [{
-                        "path": "name-of-component.htm",
+                        "path": "partials/name-of-component.htm",
                         "variation": {
                             "mainTag": "nav"
                             "content": "Content Main Nav"
@@ -325,28 +326,28 @@ et le fichier de variation spécifique `variations/home.json` suivant :
                 }
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "article",
                 "title": "Title Content",
                 "content": "Content Content",
                 "components": {
                     "item1": [{
-                        "path": "name-of-component.htm",
+                        "path": "partials/name-of-component.htm",
                         "variation": {
                             "mainTag": "aside"
                             "title": "Title Ads 1"
                         }
                     }],
                     "item2": [{
-                        "path": "name-of-component.htm",
+                        "path": "partials/name-of-component.htm",
                         "variation": {
                             "mainTag": "div"
                             "content": "Main Content"
                         }
                     }],
                     "item3": [{
-                        "path": "name-of-component.htm",
+                        "path": "partials/name-of-component.htm",
                         "variation": {
                             "mainTag": "aside"
                             "title": "Title Ads 2"
@@ -355,21 +356,21 @@ et le fichier de variation spécifique `variations/home.json` suivant :
                 }
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "aside",
                 "title": "Title Aside",
                 "content": "Content Aside"
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "footer",
                 "title": "Title Footer",
                 "content": "Content Footer",
                 "components": {
                     "item1": [{
-                        "path": "name-of-component.htm",
+                        "path": "partials/name-of-component.htm",
                         "variation": {
                             "mainTag": "nav"
                             "content": "Content Second Nav"
@@ -382,35 +383,35 @@ et le fichier de variation spécifique `variations/home.json` suivant :
 }
 ```
 
-ainsi que le composant `components/name-of-component.htm` suivant :
+ainsi que le composant `views/partials/name-of-component.htm` suivant :
 
 ```html
 <section$ class="name-of-component">
   	<div class="ui">
-	  	<h1$><%- component.title %></h1$>
-	  	<%- component.content %>
+	  	<h1$><?- component.title ?></h1$>
+	  	<?- component.content ?>
 		<ul>
-			<% if (component && component.components && component.components['item1']) { %>
+			<? if (component && component.components && component.components['item1']) { ?>
 			<li>
 				<div class="name-of-component--item">
-					<%- includeComponents('item1', component) %>
+					<?- includeComponents('item1', component) ?>
 				</div>
 			</li>
-			<% } %>
-			<% if (component && component.components && component.components['item2']) { %>
+			<? } ?>
+			<? if (component && component.components && component.components['item2']) { ?>
 			<li>
 				<div class="name-of-component--item">
-					<%- includeComponents('item2', component) %>
+					<?- includeComponents('item2', component) ?>
 				</div>
 			</li>
-			<% } %>
-			<% if (component && component.components && component.components['item3']) { %>
+			<? } ?>
+			<? if (component && component.components && component.components['item3']) { ?>
 			<li>
 				<div class="name-of-component--item">
-					<%- includeComponents('item3', component) %>
+					<?- includeComponents('item3', component) ?>
 				</div>
 			</li>
-			<% } %>
+			<? } ?>
 		</ul>
 	</div>
 </section$>
@@ -420,26 +421,26 @@ Nous pouvons générer la page que nous souhaitons, avec les conténeurs souhait
 
 #### Boucle de composant ####
 
-Le composant `components/name-of-component.htm` de notre exemple précédent aurait tout aussi bien pu être créer à l'aide d'une boucle pour gérer autant d'éléments que voulu comme suit :
+Le composant `views/partials/name-of-component.htm` de notre exemple précédent aurait tout aussi bien pu être créer à l'aide d'une boucle pour gérer autant d'éléments que voulu comme suit :
 
 ```html
 <section$ class="name-of-component">
     <div class="ui">
-        <h1$><%- component.title %></h1$>
-        <%- component.content %>
-        <% if (component && component.components) { %>
+        <h1$><?- component.title ?></h1$>
+        <?- component.content ?>
+        <? if (component && component.components) { ?>
         <ul>
-        <% for (var placeholder in component.components) { %>
-            <% if (component.components.hasOwnProperty(placeholder)) { %>
+        <? for (var placeholder in component.components) { ?>
+            <? if (component.components.hasOwnProperty(placeholder)) { ?>
             <li>
                 <div class="name-of-component--item">
-                    <%- includeComponents('placeholder', component, path) %>
+                    <?- includeComponents('placeholder', component, path) ?>
                 </div>
             </li>
-            <% } %>
-        <% } %>
+            <? } ?>
+        <? } ?>
         </ul>
-        <% } %>
+        <? } ?>
     </div>
 </section$>
 ```
@@ -456,13 +457,13 @@ Il est possible également d'identifier votre classe maître sur un composant à
 <section class$="name-of-component and-other-class">
     <div class="ui">
         <div class="$--title">
-            <h1><%- component.title %></h1>
+            <h1><?- component.title ?></h1>
         </div>
         <div class="$--content">
-            <%- component.content.text %>
+            <?- component.content.text ?>
         </div>
         <div class="$--aside">
-            <%- component.content.aside %>
+            <?- component.content.aside ?>
         </div>
     </div>
 </section>
@@ -530,7 +531,7 @@ Il est également possible de prévoir l'injection d'une classe à partir du fic
 {
     "components": {
         "placeholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "componentName": "name-of-component",
                 "title": "Title",
@@ -548,13 +549,13 @@ Il est également possible de prévoir l'injection d'une classe à partir du fic
 <section class="$ and-other-class">
     <div class="ui">
         <div class="$--title">
-            <h1><%- component.title %></h1>
+            <h1><?- component.title ?></h1>
         </div>
         <div class="$--content">
-            <%- component.content.text %>
+            <?- component.content.text ?>
         </div>
         <div class="$--aside">
-            <%- component.content.aside %>
+            <?- component.content.aside ?>
         </div>
     </div>
 </section>
@@ -566,7 +567,7 @@ et même changer les classes de variation (ici `.and-other-class`) directement d
 {
     "components": {
         "placeholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "componentName": "name-of-component and-other-class",
                 "title": "Title",
@@ -584,13 +585,13 @@ et même changer les classes de variation (ici `.and-other-class`) directement d
 <section class="$$">
     <div class="ui">
         <div class="$--title">
-            <h1><%- component.title %></h1>
+            <h1><?- component.title ?></h1>
         </div>
         <div class="$--content">
-            <%- component.content.text %>
+            <?- component.content.text ?>
         </div>
         <div class="$--aside">
-            <%- component.content.aside %>
+            <?- component.content.aside ?>
         </div>
     </div>
 </section>
@@ -616,7 +617,7 @@ currentVariation = NA.addSpecificVariation(dataEmit.variation, dataEmit.lang, cu
 currentVariation = NA.addCommonVariation(dataEmit.lang, currentVariation);
 
 /* Asynchrone addon for componentAtlas render */
-render = require(''../components/controllers/component-atlas').includeComponent.call(NA,
+render = require('./modules/component-atlas').includeComponent.call(NA,
     /* component */ currentVariation.specific.components.content[2],
     /* path */ 'specific.components.content[2]', currentVariation
 );
@@ -632,28 +633,28 @@ Malgré le nombre de fichier dans cet exemple, le coeur même utile de Component
 
 #### Inclusion côté server ####
 
-Il va falloir faire appel à une fonction provenant du fichier `components/controllers/sublime-atlas.js` dans votre controlleur commun pour permettre au moteur de template de reconnaître `includeComponents` comme dans cet exemple dans `controllers/common.js` :
+Il va falloir faire appel à une fonction provenant du fichier `controllers/modules/component-atlas.js` dans votre controlleur commun pour permettre au moteur de template de reconnaître `includeComponents` comme dans cet exemple dans `controllers/common.js` :
 
 ```js
 (function (publics) {
     "use strict";
 
-    publics.changeVariation = function (params, mainCallback) {
+    publics.changeVariation = function (params, next) {
         var variation = params.variation,
             NA = params.NA;
 
-        variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA, "components", "mainTag", "componentName");
+        variation = require('./modules/component-atlas').includeComponents(variation, NA, "components", "mainTag", "componentName");
 
-        mainCallback(variation);
+        next(variation);
     };
 
 }(website));
 ```
 
-Vous pouvez changer `mainTag` et `componentName` par une autre propriété les changeant lors de l'appel de la fonction et également mettre l'intégralité de vos composants ailleurs que dans `components`. Essayons par exemple `tag`, `name` et `placeholders` :
+Vous pouvez changer `mainTag` et `componentName` par une autre propriété les changeant lors de l'appel de la fonction et également mettre l'intégralité de vos composants ailleurs que dans `controllers/modules`. Essayons par exemple `tag`, `name` et `placeholders` :
 
 ```js
-variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA, "placeholders", "tag", "name");
+variation = require('./modules/component-atlas').includeComponents(variation, NA, "placeholders", "tag", "name");
 ```
 
 
@@ -664,7 +665,7 @@ variation = require('../components/controllers/sublime-atlas').includeComponents
 
 Grâce à l'objet `path` en complément de l'objet `component` accessible depuis chaque composant, vous pouvez savoir dans quelle lot de variations de composants les variables courantes sont. Cela vous permet de les retrouver dans vos fichiers `common` ou `specific` par leur chemin absolue ce qui va être parfait pour utiliser [EditAtlas](https://github.com/Haeresis/EditAtlas/).
 
-Il suffit de passer `path` comme c'est le cas de `component` lors de l'inclusion de composant dans des composants : `<%- includeComponents('componentsPlaceholder', component, path) %>` (depuis un template, il n'y a rien à changer).
+Il suffit de passer `path` comme c'est le cas de `component` lors de l'inclusion de composant dans des composants : `<?- includeComponents('componentsPlaceholder', component, path) ?>` (depuis un template, il n'y a rien à changer).
 
 Vous trouverez des exemples d'utilisation sur le [repository de EditAtlas](https://github.com/Haeresis/EditAtlas/).
 
@@ -674,7 +675,7 @@ Vous trouverez des exemples d'utilisation sur le [repository de EditAtlas](https
 
 ## Lancer ce repository en local ##
 
-Pour faire tourner le site en local, il vous faudra installer [NodeAtlas](https://www.lesieur.name/node-atlas/) sur votre poste de développement.
+Pour faire tourner le site en local, il vous faudra installer [NodeAtlas](https://node-atlas.js.org) sur votre poste de développement.
 
 Déplacez vous ensuite dans le dossier :
 
@@ -706,7 +707,7 @@ Le site sera accessible ici :
 
 ### Overview ###
 
-ComponentAtlas allow us to manage a website or HTML assets with nested Components with thanks to [NodeAtlas](https://www.lesieur.name/nodeatlas/). The website can be struct by piece of component just with modification into variation files (`.json`) in real time (no restart).
+ComponentAtlas allow us to manage a website or HTML assets with nested Components with thanks to [NodeAtlas](https://node-atlas.js.org/). The website can be struct by piece of component just with modification into variation files (`.json`) in real time (no restart).
 
 1. Component are not include with `include('name-of-component.htm')` but placeholders of components are setted with `includeComponents('componentsPlaceholder')`.
 
@@ -720,24 +721,24 @@ ComponentAtlas allow us to manage a website or HTML assets with nested Component
 
 6. Full compatibility with [EditAtlas](https://github.com/Haeresis/EditAtlas/) for edit in real time the components tree for modify the structure of page.
 
-You can download this repository to test it or integrate it with any of your [NodeAtlas](https://www.lesieur.name/nodeatlas/) on node.js projects.
+You can download this repository to test it or integrate it with any of your [NodeAtlas](https://node-atlas.js.org/) on node.js projects.
 
 
 
 ## How does it work ##
 
-[NodeAtlas](https://www.lesieur.name/nodeatlas/) use an inclusion mechanism can be HTML parts to allow us to change easily your website structure.
+[NodeAtlas](https://node-atlas.js.org/) use an inclusion mechanism can be HTML parts to allow us to change easily your website structure.
 
 The problem with `include` function is the path of file included is setted in hard way:
 
 ```html
-<%- include("name-of-component.htm") %>
+<?- include("name-of-component.htm") ?>
 ```
 
 With a little tricks, its possible to not set the file included into template file but into variation file to inject « in the fly » the component:
 
 ```html
-<%- include(specific.nameOfComponent) %>
+<?- include(specific.nameOfComponent) ?>
 ```
 
 We concluded quickly it will be cool :
@@ -746,9 +747,9 @@ We concluded quickly it will be cool :
 - to manage set of `specific` variation by component and not just by template. It's allow us to include a component more one time in the same page with others variations.
 
 ```html
-<% for (var i = 0; i < specific.component['firstComponentsPlaceholder'].length; i++) { %>
-    <%- include(specific.component['firstComponentsPlaceholder'][i].nameOfComponent.path, specific.component['firstComponentsPlaceholder'][i].nameOfComponent.variation) %>
-<% } %>
+<? for (var i = 0; i < specific.component['firstComponentsPlaceholder'].length; i++) { ?>
+    <?- include(specific.component['firstComponentsPlaceholder'][i].nameOfComponent.path, specific.component['firstComponentsPlaceholder'][i].nameOfComponent.variation) ?>
+<? } ?>
 ```
 
 It's a good idea also to allow us to include component into component and use this mechanism with [EditAtlas](https://github.com/Haeresis/EditAtlas/) ! It's the job of ComponentAtlas.
@@ -765,17 +766,17 @@ With the following `templates/home.htm` template:
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title><%- specific.titleOfPage %></title>
+        <title><?- specific.titleOfPage ?></title>
     </head>
     <body>
         <div class="layout">
-            <h1><%- specific.titleOfPage %></h1>
+            <h1><?- specific.titleOfPage ?></h1>
             <header>
-                <%- includeComponents('headerPlaceholder') %>
+                <?- includeComponents('headerPlaceholder') ?>
             </header>
-            <%- includeComponents('mainPlaceholder') %>
+            <?- includeComponents('mainPlaceholder') ?>
             <footer>
-                <%- includeComponents('footerPlaceholder') %>
+                <?- includeComponents('footerPlaceholder') ?>
             </footer>
         </div>
     </body>
@@ -789,39 +790,39 @@ and the following specific `variations/home.json` variation file:
     "titleOfPage": "Title of the Page",
     "components": {
         "headerPlaceholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 1",
                 "content": "Content 1"
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 2",
                 "content": "Content 2"
             }
         }],
         "mainPlaceholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 3",
                 "content": "Content 3"
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 4",
                 "content": "Content 4"
             }
         }],
         "footerPlaceholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 5",
                 "content": "Content 5"
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 6",
                 "content": "Content 6"
@@ -831,13 +832,13 @@ and the following specific `variations/home.json` variation file:
 }
 ```
 
-and the following `components/name-of-component.htm` component:
+and the following `views/partials/name-of-component.htm` component:
 
 ```html
 <section class="name-of-component">
     <div class="ui">
-        <h1><%- component.title %></h1>
-        <%- component.content %>
+        <h1><?- component.title ?></h1>
+        <?- component.content ?>
     </div>
 </section>
 ```
@@ -858,17 +859,17 @@ with the following `templates/home.htm` template:
 <html lang="en">
     <head>
     <meta charset="utf-8">
-        <title><%- specific.titleOfPage %></title>
+        <title><?- specific.titleOfPage ?></title>
     </head>
     <body>
         <div class="layout">
-            <h1><%- specific.titleOfPage %></h1>
+            <h1><?- specific.titleOfPage ?></h1>
             <header>
-                <%- includeComponents('headerPlaceholder', 'common') %>
+                <?- includeComponents('headerPlaceholder', 'common') ?>
             </header>
-            <%- includeComponents('mainPlaceholder') %>
+            <?- includeComponents('mainPlaceholder') ?>
             <footer>
-                <%- includeComponents('footerPlaceholder', 'common') %>
+                <?- includeComponents('footerPlaceholder', 'common') ?>
             </footer>
         </div>
     </body>
@@ -882,13 +883,13 @@ and the following `variations/home.json` specific variation:
     "titleOfPage": "Title of the Page",
     "components": {
         "mainPlaceholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 3",
                 "content": "Content 3"
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "title": "Title 4",
                 "content": "Content 4"
@@ -905,14 +906,14 @@ and the following `variations/common.json` common variation:
     "titleOfPage": "Title of the Page",
     "components": {
         "headerPlaceholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "div",
                 "title": "Title 1",
                 "content": "Content 1"
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "div",
                 "title": "Title 2",
@@ -920,14 +921,14 @@ and the following `variations/common.json` common variation:
             }
         }],
         "footerPlaceholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "div",
                 "title": "Title 5",
                 "content": "Content 5"
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "div",
                 "title": "Title 6",
@@ -938,13 +939,13 @@ and the following `variations/common.json` common variation:
 }
 ```
 
-and the following `components/name-of-component.htm` component:
+and the following `views/partials/name-of-component.htm` component:
 
 ```html
 <section$ class="name-of-component">
     <div class="ui">
-        <h1$><%- component.title %></h1$>
-        <%- component.content %>
+        <h1$><?- component.title ?></h1$>
+        <?- component.content ?>
     </div>
 </section$>
 ```
@@ -960,7 +961,7 @@ In this case, it's interesting to transform `<section>` in `<div>` because it wi
 
 The problem is double `<h1>` into `<header>`. The `<h1>` from template and the `<h1>` from component. ComponentAtlas allow you to resolve conflict in a simply way !
 
-You have maybe seen in `components/name-of-component.htm` component the `$` into the `<section>` tag and into the `<h1>` tag. And you have maybe seen a `mainTag` variable for each component from `variations/common.json` file.
+You have maybe seen in `views/partials/name-of-component.htm` component the `$` into the `<section>` tag and into the `<h1>` tag. And you have maybe seen a `mainTag` variable for each component from `variations/common.json` file.
 
 
 This `$` are remove from final HTML render if no `mainTag` are found into variation for the component. But if a `mainTag` exist, a list of transformations are executed.
@@ -975,9 +976,9 @@ That are the transformation:
 
 ### Include Components into Component ###
 
-It's possible to include nested components in components to realize every structure of pages you want. For this, pass the `component` variable when you include a component : `<%- includeComponents('componentsPlaceholder', component) %>`.
+It's possible to include nested components in components to realize every structure of pages you want. For this, pass the `component` variable when you include a component : `<?- includeComponents('componentsPlaceholder', component) ?>`.
 
-*Note : it's still possible to inject a component from the root of `specific` or `common` variation files with `<%- includeComponents('componentsPlaceholder') %>` or `<%- includeComponents('componentsPlaceholder', 'common') %>`.*
+*Note : it's still possible to inject a component from the root of `specific` or `common` variation files with `<?- includeComponents('componentsPlaceholder') ?>` or `<?- includeComponents('componentsPlaceholder', 'common') ?>`.*
 
 For example :
 
@@ -988,12 +989,12 @@ with the following `templates/home.htm` template:
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title><%- specific.titleOfPage %></title>
+        <title><?- specific.titleOfPage ?></title>
     </head>
     <body>
         <div class="layout">
-            <h1><%- specific.titleOfPage %></h1>
-            <%- includeComponents('root') %>
+            <h1><?- specific.titleOfPage ?></h1>
+            <?- includeComponents('root') ?>
         </div>
     </body>
 </html>
@@ -1006,14 +1007,14 @@ and the following specific `variations/home.json` variation files:
     "titleOfPage": "Title of the Page",
     "components": {
         "root": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "header",
                 "title": "Title Header",
                 "content": "Content Header",
                 "components": {
                     "item1": [{
-                        "path": "name-of-component.htm",
+                        "path": "partials/name-of-component.htm",
                         "variation": {
                             "mainTag": "nav"
                             "content": "Content Main Nav"
@@ -1022,28 +1023,28 @@ and the following specific `variations/home.json` variation files:
                 }
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "article",
                 "title": "Title Content",
                 "content": "Content Content",
                 "components": {
                     "item1": [{
-                        "path": "name-of-component.htm",
+                        "path": "partials/name-of-component.htm",
                         "variation": {
                             "mainTag": "aside"
                             "title": "Title Ads 1"
                         }
                     }],
                     "item2": [{
-                        "path": "name-of-component.htm",
+                        "path": "partials/name-of-component.htm",
                         "variation": {
                             "mainTag": "div"
                             "content": "Main Content"
                         }
                     }],
                     "item3": [{
-                        "path": "name-of-component.htm",
+                        "path": "partials/name-of-component.htm",
                         "variation": {
                             "mainTag": "aside"
                             "title": "Title Ads 2"
@@ -1052,21 +1053,21 @@ and the following specific `variations/home.json` variation files:
                 }
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "aside",
                 "title": "Title Aside",
                 "content": "Content Aside"
             }
         }, {
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "mainTag": "footer",
                 "title": "Title Footer",
                 "content": "Content Footer",
                 "components": {
                     "item1": [{
-                        "path": "name-of-component.htm",
+                        "path": "partials/name-of-component.htm",
                         "variation": {
                             "mainTag": "nav"
                             "content": "Content Second Nav"
@@ -1079,35 +1080,35 @@ and the following specific `variations/home.json` variation files:
 }
 ```
 
-and the following specific `components/name-of-component.htm` composant:
+and the following specific `views/partials/name-of-component.htm` composant:
 
 ```html
 <section$ class="name-of-component">
     <div class="ui">
-        <h1$><%- component.title %></h1$>
-        <%- component.content %>
+        <h1$><?- component.title ?></h1$>
+        <?- component.content ?>
         <ul>
-            <% if (component && component.components && component.components['item1']) { %>
+            <? if (component && component.components && component.components['item1']) { ?>
             <li>
                 <div class="name-of-component--item">
-                    <%- includeComponents('item1', component) %>
+                    <?- includeComponents('item1', component) ?>
                 </div>
             </li>
-            <% } %>
-            <% if (component && component.components && component.components['item2']) { %>
+            <? } ?>
+            <? if (component && component.components && component.components['item2']) { ?>
             <li>
                 <div class="name-of-component--item">
-                    <%- includeComponents('item2', component) %>
+                    <?- includeComponents('item2', component) ?>
                 </div>
             </li>
-            <% } %>
-            <% if (component && component.components && component.components['item3']) { %>
+            <? } ?>
+            <? if (component && component.components && component.components['item3']) { ?>
             <li>
                 <div class="name-of-component--item">
-                    <%- includeComponents('item3', component) %>
+                    <?- includeComponents('item3', component) ?>
                 </div>
             </li>
-            <% } %>
+            <? } ?>
         </ul>
     </div>
 </section$>
@@ -1117,26 +1118,26 @@ We can manage the page we want, with the desired containers and a perfect HTML5 
 
 #### Loop of Component ####
 
-The `components/name-of-component.htm` component from previous example could be a loop as following:
+The `views/partials/name-of-component.htm` component from previous example could be a loop as following:
 
 ```html
 <section$ class="name-of-component and-other-class">
     <div class="ui">
-        <h1$><%- component.title %></h1$>
-        <%- component.content %>
-        <% if (component && component.components) { %>
+        <h1$><?- component.title ?></h1$>
+        <?- component.content ?>
+        <? if (component && component.components) { ?>
         <ul>
-        <% for (var placeholder in component.components) { %>
-            <% if (component.components.hasOwnProperty(placeholder)) { %>
+        <? for (var placeholder in component.components) { ?>
+            <? if (component.components.hasOwnProperty(placeholder)) { ?>
             <li>
                 <div class="name-of-component--item">
-                    <%- includeComponents('placeholder', component, path) %>
+                    <?- includeComponents('placeholder', component, path) ?>
                 </div>
             </li>
-            <% } %>
-        <% } %>
+            <? } ?>
+        <? } ?>
         </ul>
-        <% } %>
+        <? } ?>
     </div>
 </section$>
 ```
@@ -1153,13 +1154,13 @@ It's also possible to identify your main class for component with `class$` to no
 <section class$="name-of-component and-other-class">
     <div class="ui">
         <div class="$--title">
-            <h1><%- component.title %></h1>
+            <h1><?- component.title ?></h1>
         </div>
         <div class="$--content">
-            <%- component.content.text %>
+            <?- component.content.text ?>
         </div>
         <div class="$--aside">
-            <%- component.content.aside %>
+            <?- component.content.aside ?>
         </div>
     </div>
 </section>
@@ -1227,7 +1228,7 @@ It's also possible to inject a class via variation file like this:
 {
     "components": {
         "placeholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "componentName": "name-of-component",
                 "title": "Title",
@@ -1245,13 +1246,13 @@ It's also possible to inject a class via variation file like this:
 <section class="$ and-other-class">
     <div class="ui">
         <div class="$--title">
-            <h1><%- component.title %></h1>
+            <h1><?- component.title ?></h1>
         </div>
         <div class="$--content">
-            <%- component.content.text %>
+            <?- component.content.text ?>
         </div>
         <div class="$--aside">
-            <%- component.content.aside %>
+            <?- component.content.aside ?>
         </div>
     </div>
 </section>
@@ -1263,7 +1264,7 @@ and also to change all classes (here `.and-other-class`) into the variation file
 {
     "components": {
         "placeholder": [{
-            "path": "name-of-component.htm",
+            "path": "partials/name-of-component.htm",
             "variation": {
                 "componentName": "name-of-component and-other-class",
                 "title": "Title",
@@ -1281,13 +1282,13 @@ and also to change all classes (here `.and-other-class`) into the variation file
 <section class="$$">
     <div class="ui">
         <div class="$--title">
-            <h1><%- component.title %></h1>
+            <h1><?- component.title ?></h1>
         </div>
         <div class="$--content">
-            <%- component.content.text %>
+            <?- component.content.text ?>
         </div>
         <div class="$--aside">
-            <%- component.content.aside %>
+            <?- component.content.aside ?>
         </div>
     </div>
 </section>
@@ -1313,7 +1314,7 @@ currentVariation = NA.addSpecificVariation(dataEmit.variation, dataEmit.lang, cu
 currentVariation = NA.addCommonVariation(dataEmit.lang, currentVariation);
 
 /* Asynchrone addon for componentAtlas render */
-render = require(''../components/controllers/component-atlas').includeComponent.call(NA,
+render = require('./modules/component-atlas').includeComponent.call(NA,
     /* component */ currentVariation.specific.components.content[2],
     /* path */ 'specific.components.content[2]', currentVariation
 );
@@ -1329,7 +1330,7 @@ Despite the number of file in this example, the ComponentAtlas core useful for y
 
 #### Server Side Inclusion ####
 
-The feature you will run could be find into the `components/controllers/sublime-atlas.js` file. Use it in your common controller as following:
+The feature you will run could be find into the `controllers/modules/component-atlas.js` file. Use it in your common controller as following:
 
 ```js
 (function (publics) {
@@ -1339,7 +1340,7 @@ The feature you will run could be find into the `components/controllers/sublime-
         var variation = params.variation,
             NA = params.NA;
 
-        variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA, "components", "mainTag", "componentName");
+        variation = require('./modules/component-atlas').includeComponents(variation, NA, "components", "mainTag", "componentName");
 
         mainCallback(variation);
     };
@@ -1347,10 +1348,10 @@ The feature you will run could be find into the `components/controllers/sublime-
 }(website));
 ```
 
-You can change `mainTag` and `componentName` with other value when you call the function and also set your component into a `components` parameter different. See this example with `tag`, `name` and `placeholders`:
+You can change `mainTag` and `componentName` with other value when you call the function and also set your component into a `controllers/modules` parameter different. See this example with `tag`, `name` and `placeholders`:
 
 ```js
-variation = require('../components/controllers/sublime-atlas').includeComponents(variation, NA, "placeholders", "tag", "name");
+variation = require('./modules/component-atlas').includeComponents(variation, NA, "placeholders", "tag", "name");
 ```
 
 
@@ -1361,7 +1362,7 @@ variation = require('../components/controllers/sublime-atlas').includeComponents
 
 With `path` object in addition of `component` deliver into an HTML component, you can know what set of variations component are currently in use from `specific` or `common` file. This is useful for [EditAtlas](https://github.com/Haeresis/EditAtlas/).
 
-Just pass the `path` in same way of `component` when you include a component into a component: `<%- includeComponents('componentsPlaceholder', component, path) %>` (from a template, not set that).
+Just pass the `path` in same way of `component` when you include a component into a component: `<?- includeComponents('componentsPlaceholder', component, path) ?>` (from a template, not set that).
 
 You find utilisation example on the [EditAtlas repository](https://github.com/Haeresis/EditAtlas/).
 

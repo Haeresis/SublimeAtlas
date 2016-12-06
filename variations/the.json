@@ -3,29 +3,29 @@
 	"title": "Title Here <br> and Title Here",
 	"components": {
 		"head": [{
-			"path": "templates/rubbon.htm",
+			"path": "partials/rubbon.htm",
 			"variation": {
 				"mainTag": "div"
 			}
 		}, {
-			"path": "templates/header.htm",
+			"path": "partials/header.htm",
 			"variation": {
 				"mainTag": "header"
 			}
 		}],
 		"main" : [{
-			"path": "templates/additional-menu.htm",
+			"path": "partials/additional-menu.htm",
 			"variation": {
 				"mainTag": "nav",
 				"componentName": "additional-menu as-variation"
 			}
 		}, {
-			"path": "templates/title.htm",
+			"path": "partials/title.htm",
 			"variation": {
 				"mainTag": "div"
 			}
 		}, {
-			"path": "templates/image-content.htm",
+			"path": "partials/image-content.htm",
 			"variation": {
 				"mainTag": "article",
 				"content": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam rerum ratione dolorum placeat <br /> enim voluptate mollitia atque accusantium ea quos, debitis excepturi quas accusamus incidunt perspiciatis, tenetur hic eligendi officia.</p>",
@@ -35,18 +35,18 @@
 				}
 			}
 		}, {
-			"path": "templates/image-aside.htm",
+			"path": "partials/image-aside.htm",
 			"variation": {
 				"mainTag": "section"
 			}
 		}],
 		"aside" : [{
-			"path": "templates/three-items.htm",
+			"path": "partials/three-items.htm",
 			"variation": {
 				"mainTag": "aside",
 				"components": {
 					"item-1": [{
-						"path": "templates/box.htm",
+						"path": "partials/box.htm",
 						"variation": {
 							"mainTag": "div",
 							"title": "Jade",
@@ -54,7 +54,7 @@
 						}
 					}],
 					"item-2": [{
-						"path": "templates/box.htm",
+						"path": "partials/box.htm",
 						"variation": {
 							"mainTag": "div",
 							"title": "DevJad",
@@ -62,7 +62,7 @@
 						}
 					}],
 					"item-3": [{
-						"path": "templates/box.htm",
+						"path": "partials/box.htm",
 						"variation": {
 							"mainTag": "DvN JD",
 							"title": "In Many Sicure",
@@ -73,12 +73,12 @@
 			}
 		}],
 		"foot" : [{
-			"path": "templates/banner.htm",
+			"path": "partials/banner.htm",
 			"variation": {
 				"mainTag": "div"
 			}
 		}, {
-			"path": "templates/footer.htm",
+			"path": "partials/footer.htm",
 			"variation": {
 				"mainTag": "footer",
 				"componentName": "footer-main"

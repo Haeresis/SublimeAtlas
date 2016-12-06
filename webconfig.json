@@ -2,7 +2,6 @@
 	"httpPort": 7777,
 	"enableIndex": true,
 	"enableLess": true,
-	"generatesRelativePath": "generates/",
 	"commonController": "common.js",
 	"commonVariation": "common.json",
 	"staticOptions": {
@@ -17,19 +16,19 @@
 	},
 	"routes": {
 		"/home.html": {
-			"template": "standard.htm",
+			"view": "standard.htm",
 			"variation": "home.json"
 		},
 		"/product.html": {
-			"template": "standard.htm",
+			"view": "standard.htm",
 			"variation": "product.json"
 		},
 		"/other.html": {
-			"template": "standard.htm",
+			"view": "standard.htm",
 			"variation": "sh.json"
 		},
 		"/list.html": {
-			"template": "simple.htm",
+			"view": "simple.htm",
 			"variation": "the.json"
 		}
 	}

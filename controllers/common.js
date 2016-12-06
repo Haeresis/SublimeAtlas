@@ -4,15 +4,15 @@ website.components = {};
 
 (function (publics) {
 
-    website.components.comopnentAtlas = require('../components/controllers/component-atlas');
+    website.components.comopnentAtlas = require('./modules/component-atlas');
 
-    publics.changeVariation = function (params, mainCallback) {
+    publics.changeVariation = function (params, next) {
         var NA = this,
             variation = params.variation;
 
         variation = website.components.comopnentAtlas.includeComponents.call(NA, variation, "components", "mainTag", "componentName");
 
-        mainCallback(variation);
+        next(variation);
     };
 
 }(website));

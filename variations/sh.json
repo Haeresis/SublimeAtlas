@@ -3,29 +3,29 @@
 	"title": "Page Title",
 	"components": {
 		"head": [{
-			"path": "templates/rubbon.htm",
+			"path": "partials/rubbon.htm",
 			"variation": {
 				"mainTag": "div"
 			}
 		}, {
-			"path": "templates/header.htm",
+			"path": "partials/header.htm",
 			"variation": {
 				"mainTag": "header"
 			}
 		}],
 		"main" : [{
-			"path": "templates/additional-menu.htm",
+			"path": "partials/additional-menu.htm",
 			"variation": {
 				"mainTag": "nav",
 				"componentName": "additional-menu as-variation"
 			}
 		}, {
-			"path": "templates/title.htm",
+			"path": "partials/title.htm",
 			"variation": {
 				"mainTag": "div"
 			}
 		}, {
-			"path": "templates/image-content.htm",
+			"path": "partials/image-content.htm",
 			"variation": {
 				"mainTag": "article",
 				"content": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui explicabo consectetur eum rerum voluptatibus sunt adipisci quod, incidunt nemo amet, ut quae sit ipsa voluptas iusto facere. Reprehenderit, excepturi, placeat.</p>",
@@ -35,24 +35,24 @@
 				}
 			}
 		}, {
-			"path": "templates/image-list.htm",
+			"path": "partials/image-list.htm",
 			"variation": {
 				"mainTag": "section"
 			}
 		}],
 		"overview" : [{
-			"path": "templates/overview.htm",
+			"path": "partials/overview.htm",
 			"variation": {
 				"mainTag": "section"
 			}
 		}],
 		"aside" : [{
-			"path": "templates/three-items.htm",
+			"path": "partials/three-items.htm",
 			"variation": {
 				"mainTag": "aside",
 				"components": {
 					"item-1": [{
-						"path": "templates/box.htm",
+						"path": "partials/box.htm",
 						"variation": {
 							"mainTag": "div",
 							"title": "Devon",
@@ -60,7 +60,7 @@
 						}
 					}],
 					"item-2": [{
-						"path": "templates/box.htm",
+						"path": "partials/box.htm",
 						"variation": {
 							"mainTag": "div",
 							"title": "Devon Jade",
@@ -68,7 +68,7 @@
 						}
 					}],
 					"item-3": [{
-						"path": "templates/box.htm",
+						"path": "partials/box.htm",
 						"variation": {
 							"mainTag": "div",
 							"title": "Jade Devon",
@@ -79,12 +79,12 @@
 			}
 		}],
 		"foot" : [{
-			"path": "templates/banner.htm",
+			"path": "partials/banner.htm",
 			"variation": {
 				"mainTag": "div"
 			}
 		}, {
-			"path": "templates/footer.htm",
+			"path": "partials/footer.htm",
 			"variation": {
 				"mainTag": "footer",
 				"componentName": "footer-main"
