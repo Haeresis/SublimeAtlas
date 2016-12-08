@@ -4,9 +4,6 @@
 	"enableLess": true,
 	"commonController": "common.js",
 	"commonVariation": "common.json",
-	"staticOptions": {
-        "maxAge": 0
-    },
 	"optimizations": {
 		"images": {
 			"media/images/*.{gif,jpg,png,svg}": "media/images/",
