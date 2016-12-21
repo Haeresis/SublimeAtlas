@@ -6,15 +6,15 @@ website.components = {};
 
     website.components.comopnentAtlas = require('./modules/component-atlas');
 
-    publics.changeVariation = function (params, next) {
+    publics.changeVariations = function (params, next) {
         var NA = this,
-            variation = params.variation;
+            variations = params.variations;
 
-        variation = website.components.comopnentAtlas.includeComponents.call(NA, variation, "components", "mainTag", "componentName");
+        variations = website.components.comopnentAtlas.includeComponents.call(NA, variations, "components", "mainTag", "componentName");
 
-        next(variation);
+        next(variations);
     };
 
 }(website));
 
-exports.changeVariation = website.changeVariation;
+exports.changeVariations = website.changeVariations;

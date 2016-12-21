@@ -4,29 +4,29 @@
 	"components": {
 		"head": [{
 			"path": "partials/rubbon.htm",
-			"variation": {
+			"variations": {
 				"mainTag": "div"
 			}
 		}, {
 			"path": "partials/header.htm",
-			"variation": {
+			"variations": {
 				"mainTag": "header"
 			}
 		}],
 		"main" : [{
 			"path": "partials/additional-menu.htm",
-			"variation": {
+			"variations": {
 				"mainTag": "nav",
 				"componentName": "additional-menu as-variation"
 			}
 		}, {
 			"path": "partials/title.htm",
-			"variation": {
+			"variations": {
 				"mainTag": "div"
 			}
 		}, {
 			"path": "partials/image-content.htm",
-			"variation": {
+			"variations": {
 				"mainTag": "article",
 				"content": "<p>Lorem ipsum dolor sit amet, consectetur <strong>adipisicing elit. Illo qui alias error nobis, consectetur</strong> a officia repellat ipsam magnam laudantium minus, dicta debitis ea, odio reiciendis! Pariatur, soluta tempore aspernatur.</p>",
 				"image": {
@@ -37,18 +37,18 @@
 		}],
 		"overview" : [{
 			"path": "partials/overview.htm",
-			"variation": {
+			"variations": {
 				"mainTag": "section"
 			}
 		}],
 		"aside" : [{
 			"path": "partials/three-items.htm",
-			"variation": {
+			"variations": {
 				"mainTag": "aside",
 				"components": {
 					"item-1": [{
 						"path": "partials/box.htm",
-						"variation": {
+						"variations": {
 							"mainTag": "div",
 							"title": "Devon",
 							"image": "./media/images/act.png"
@@ -56,7 +56,7 @@
 					}],
 					"item-2": [{
 						"path": "partials/box.htm",
-						"variation": {
+						"variations": {
 							"mainTag": "div",
 							"title": "Devon Jade",
 							"image": "./media/images/use.png"
@@ -64,7 +64,7 @@
 					}],
 					"item-3": [{
 						"path": "partials/box.htm",
-						"variation": {
+						"variations": {
 							"mainTag": "div",
 							"title": "Jade Devon",
 							"image": "./media/images/the.png"
@@ -75,12 +75,12 @@
 		}],
 		"foot" : [{
 			"path": "partials/banner.htm",
-			"variation": {
+			"variations": {
 				"mainTag": "div"
 			}
 		}, {
 			"path": "partials/footer.htm",
-			"variation": {
+			"variations": {
 				"mainTag": "footer",
 				"componentName": "footer-main"
 			}

@@ -52,7 +52,7 @@ On arrive rapidement à la conclusion qu'il serait agréable :
 
 ```html
 <? for (var i = 0; i < specific.component['firstComponentsPlaceholder'].length; i++) { ?>
-	<?- include(specific.component['firstComponentsPlaceholder'][i].nameOfComponent.path, specific.component['firstComponentsPlaceholder'][i].nameOfComponent.variation) ?>
+	<?- include(specific.component['firstComponentsPlaceholder'][i].nameOfComponent.path, specific.component['firstComponentsPlaceholder'][i].nameOfComponent.variations) ?>
 <? } ?>
 ```
 
@@ -95,39 +95,39 @@ et le fichier de variation spécifique `variations/home.json` suivant :
     "components": {
         "headerPlaceholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 1",
                 "content": "Content 1"
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 2",
                 "content": "Content 2"
             }
         }],
         "mainPlaceholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 3",
                 "content": "Content 3"
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 4",
                 "content": "Content 4"
             }
         }],
         "footerPlaceholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 5",
                 "content": "Content 5"
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 6",
                 "content": "Content 6"
             }
@@ -188,13 +188,13 @@ et le fichier de variation spécifique `variations/home.json` suivant :
     "components": {
         "mainPlaceholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 3",
                 "content": "Content 3"
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 4",
                 "content": "Content 4"
             }
@@ -211,14 +211,14 @@ et le fichier de variation commune `variations/common.json` suivant :
     "components": {
         "headerPlaceholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "div",
                 "title": "Title 1",
                 "content": "Content 1"
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "div",
                 "title": "Title 2",
                 "content": "Content 2"
@@ -226,14 +226,14 @@ et le fichier de variation commune `variations/common.json` suivant :
         }],
         "footerPlaceholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "div",
                 "title": "Title 5",
                 "content": "Content 5"
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "div",
                 "title": "Title 6",
                 "content": "Content 6"
@@ -311,14 +311,14 @@ et le fichier de variation spécifique `variations/home.json` suivant :
     "components": {
         "root": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "header",
                 "title": "Title Header",
                 "content": "Content Header",
                 "components": {
                     "item1": [{
                         "path": "partials/name-of-component.htm",
-                        "variation": {
+                        "variations": {
                             "mainTag": "nav"
                             "content": "Content Main Nav"
                         }
@@ -327,28 +327,28 @@ et le fichier de variation spécifique `variations/home.json` suivant :
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "article",
                 "title": "Title Content",
                 "content": "Content Content",
                 "components": {
                     "item1": [{
                         "path": "partials/name-of-component.htm",
-                        "variation": {
+                        "variations": {
                             "mainTag": "aside"
                             "title": "Title Ads 1"
                         }
                     }],
                     "item2": [{
                         "path": "partials/name-of-component.htm",
-                        "variation": {
+                        "variations": {
                             "mainTag": "div"
                             "content": "Main Content"
                         }
                     }],
                     "item3": [{
                         "path": "partials/name-of-component.htm",
-                        "variation": {
+                        "variations": {
                             "mainTag": "aside"
                             "title": "Title Ads 2"
                         }
@@ -357,21 +357,21 @@ et le fichier de variation spécifique `variations/home.json` suivant :
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "aside",
                 "title": "Title Aside",
                 "content": "Content Aside"
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "footer",
                 "title": "Title Footer",
                 "content": "Content Footer",
                 "components": {
                     "item1": [{
                         "path": "partials/name-of-component.htm",
-                        "variation": {
+                        "variations": {
                             "mainTag": "nav"
                             "content": "Content Second Nav"
                         }
@@ -532,7 +532,7 @@ Il est également possible de prévoir l'injection d'une classe à partir du fic
     "components": {
         "placeholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "componentName": "name-of-component",
                 "title": "Title",
                 "content": {
@@ -568,7 +568,7 @@ et même changer les classes de variation (ici `.and-other-class`) directement d
     "components": {
         "placeholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "componentName": "name-of-component and-other-class",
                 "title": "Title",
                 "content": {
@@ -639,13 +639,13 @@ Il va falloir faire appel à une fonction provenant du fichier `controllers/modu
 (function (publics) {
     "use strict";
 
-    publics.changeVariation = function (params, next) {
-        var variation = params.variation,
+    publics.changeVariations = function (params, next) {
+        var variations = params.variations,
             NA = params.NA;
 
-        variation = require('./modules/component-atlas').includeComponents(variation, NA, "components", "mainTag", "componentName");
+        variations = require('./modules/component-atlas').includeComponents(variations, NA, "components", "mainTag", "componentName");
 
-        next(variation);
+        next(variations);
     };
 
 }(website));
@@ -654,7 +654,7 @@ Il va falloir faire appel à une fonction provenant du fichier `controllers/modu
 Vous pouvez changer `mainTag` et `componentName` par une autre propriété les changeant lors de l'appel de la fonction et également mettre l'intégralité de vos composants ailleurs que dans `controllers/modules`. Essayons par exemple `tag`, `name` et `placeholders` :
 
 ```js
-variation = require('./modules/component-atlas').includeComponents(variation, NA, "placeholders", "tag", "name");
+variations = require('./modules/component-atlas').includeComponents(variations, NA, "placeholders", "tag", "name");
 ```
 
 
@@ -748,7 +748,7 @@ We concluded quickly it will be cool :
 
 ```html
 <? for (var i = 0; i < specific.component['firstComponentsPlaceholder'].length; i++) { ?>
-    <?- include(specific.component['firstComponentsPlaceholder'][i].nameOfComponent.path, specific.component['firstComponentsPlaceholder'][i].nameOfComponent.variation) ?>
+    <?- include(specific.component['firstComponentsPlaceholder'][i].nameOfComponent.path, specific.component['firstComponentsPlaceholder'][i].nameOfComponent.variations) ?>
 <? } ?>
 ```
 
@@ -791,39 +791,39 @@ and the following specific `variations/home.json` variation file:
     "components": {
         "headerPlaceholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 1",
                 "content": "Content 1"
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 2",
                 "content": "Content 2"
             }
         }],
         "mainPlaceholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 3",
                 "content": "Content 3"
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 4",
                 "content": "Content 4"
             }
         }],
         "footerPlaceholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 5",
                 "content": "Content 5"
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 6",
                 "content": "Content 6"
             }
@@ -884,13 +884,13 @@ and the following `variations/home.json` specific variation:
     "components": {
         "mainPlaceholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 3",
                 "content": "Content 3"
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "title": "Title 4",
                 "content": "Content 4"
             }
@@ -907,14 +907,14 @@ and the following `variations/common.json` common variation:
     "components": {
         "headerPlaceholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "div",
                 "title": "Title 1",
                 "content": "Content 1"
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "div",
                 "title": "Title 2",
                 "content": "Content 2"
@@ -922,14 +922,14 @@ and the following `variations/common.json` common variation:
         }],
         "footerPlaceholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "div",
                 "title": "Title 5",
                 "content": "Content 5"
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "div",
                 "title": "Title 6",
                 "content": "Content 6"
@@ -1008,14 +1008,14 @@ and the following specific `variations/home.json` variation files:
     "components": {
         "root": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "header",
                 "title": "Title Header",
                 "content": "Content Header",
                 "components": {
                     "item1": [{
                         "path": "partials/name-of-component.htm",
-                        "variation": {
+                        "variations": {
                             "mainTag": "nav"
                             "content": "Content Main Nav"
                         }
@@ -1024,28 +1024,28 @@ and the following specific `variations/home.json` variation files:
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "article",
                 "title": "Title Content",
                 "content": "Content Content",
                 "components": {
                     "item1": [{
                         "path": "partials/name-of-component.htm",
-                        "variation": {
+                        "variations": {
                             "mainTag": "aside"
                             "title": "Title Ads 1"
                         }
                     }],
                     "item2": [{
                         "path": "partials/name-of-component.htm",
-                        "variation": {
+                        "variations": {
                             "mainTag": "div"
                             "content": "Main Content"
                         }
                     }],
                     "item3": [{
                         "path": "partials/name-of-component.htm",
-                        "variation": {
+                        "variations": {
                             "mainTag": "aside"
                             "title": "Title Ads 2"
                         }
@@ -1054,21 +1054,21 @@ and the following specific `variations/home.json` variation files:
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "aside",
                 "title": "Title Aside",
                 "content": "Content Aside"
             }
         }, {
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "mainTag": "footer",
                 "title": "Title Footer",
                 "content": "Content Footer",
                 "components": {
                     "item1": [{
                         "path": "partials/name-of-component.htm",
-                        "variation": {
+                        "variations": {
                             "mainTag": "nav"
                             "content": "Content Second Nav"
                         }
@@ -1229,7 +1229,7 @@ It's also possible to inject a class via variation file like this:
     "components": {
         "placeholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "componentName": "name-of-component",
                 "title": "Title",
                 "content": {
@@ -1265,7 +1265,7 @@ and also to change all classes (here `.and-other-class`) into the variation file
     "components": {
         "placeholder": [{
             "path": "partials/name-of-component.htm",
-            "variation": {
+            "variations": {
                 "componentName": "name-of-component and-other-class",
                 "title": "Title",
                 "content": {
@@ -1336,13 +1336,13 @@ The feature you will run could be find into the `controllers/modules/component-a
 (function (publics) {
     "use strict";
 
-    publics.changeVariation = function (params, mainCallback) {
-        var variation = params.variation,
+    publics.changeVariations = function (params, mainCallback) {
+        var variations = params.variations,
             NA = params.NA;
 
-        variation = require('./modules/component-atlas').includeComponents(variation, NA, "components", "mainTag", "componentName");
+        variations = require('./modules/component-atlas').includeComponents(variations, NA, "components", "mainTag", "componentName");
 
-        mainCallback(variation);
+        mainCallback(variations);
     };
 
 }(website));
@@ -1351,7 +1351,7 @@ The feature you will run could be find into the `controllers/modules/component-a
 You can change `mainTag` and `componentName` with other value when you call the function and also set your component into a `controllers/modules` parameter different. See this example with `tag`, `name` and `placeholders`:
 
 ```js
-variation = require('./modules/component-atlas').includeComponents(variation, NA, "placeholders", "tag", "name");
+variations = require('./modules/component-atlas').includeComponents(variations, NA, "placeholders", "tag", "name");
 ```
 
 
