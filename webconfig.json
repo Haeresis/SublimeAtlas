@@ -1,9 +1,9 @@
 {
 	"httpPort": 7777,
-	"enableIndex": true,
-	"enableLess": true,
-	"commonController": "common.js",
-	"commonVariation": "common.json",
+	"index": true,
+	"less": true,
+	"controller": "common.js",
+	"variation": "common.json",
 	"optimizations": {
 		"images": {
 			"media/images/*.{gif,jpg,png,svg}": "media/images/",

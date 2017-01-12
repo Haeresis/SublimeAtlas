@@ -3,7 +3,6 @@
 Version : 0.4 (Beta)
 
 NodeAtlas Version minimale : 2.0.x
-NodeAtlas Template Engine : Atlas, EJS (<? ?>)
 
 **For an international version of this README.md, [see below](#international-version).**
 
@@ -613,8 +612,8 @@ var /* Data from AJAX or Websocket Request
     render;
 
 /* Asynchrone render of template and variations */
-currentVariation = NA.addSpecificVariation(dataEmit.variation, dataEmit.lang, currentVariation);
-currentVariation = NA.addCommonVariation(dataEmit.lang, currentVariation);
+currentVariation = NA.specific(dataEmit.variation, dataEmit.lang, currentVariation);
+currentVariation = NA.common(dataEmit.lang, currentVariation);
 
 /* Asynchrone addon for componentAtlas render */
 render = require('./modules/component-atlas').includeComponent.call(NA,
@@ -1310,8 +1309,8 @@ var /* Data from AJAX or Websocket Request
     render;
 
 /* Asynchrone render of template and variations */
-currentVariation = NA.addSpecificVariation(dataEmit.variation, dataEmit.lang, currentVariation);
-currentVariation = NA.addCommonVariation(dataEmit.lang, currentVariation);
+currentVariation = NA.specific(dataEmit.variation, dataEmit.lang, currentVariation);
+currentVariation = NA.common(dataEmit.lang, currentVariation);
 
 /* Asynchrone addon for componentAtlas render */
 render = require('./modules/component-atlas').includeComponent.call(NA,
