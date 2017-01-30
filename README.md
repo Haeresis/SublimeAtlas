@@ -638,13 +638,12 @@ Il va falloir faire appel à une fonction provenant du fichier `controllers/modu
 (function (publics) {
     "use strict";
 
-    publics.changeVariations = function (params, next) {
-        var variations = params.variations,
-            NA = params.NA;
+    publics.changeVariations = function (next, locals) {
+        var NA = this;
 
-        variations = require('./modules/component-atlas').includeComponents(variations, NA, "components", "mainTag", "componentName");
+        locals = require('./modules/component-atlas').includeComponents(locals, NA, "components", "mainTag", "componentName");
 
-        next(variations);
+        next();
     };
 
 }(website));
@@ -1335,13 +1334,12 @@ The feature you will run could be find into the `controllers/modules/component-a
 (function (publics) {
     "use strict";
 
-    publics.changeVariations = function (params, mainCallback) {
-        var variations = params.variations,
-            NA = params.NA;
+    publics.changeVariations = function (next, locals) {
+        var NA = this;
 
-        variations = require('./modules/component-atlas').includeComponents(variations, NA, "components", "mainTag", "componentName");
+        locals = require('./modules/component-atlas').includeComponents(locals, NA, "components", "mainTag", "componentName");
 
-        mainCallback(variations);
+        next();
     };
 
 }(website));
@@ -1350,7 +1348,7 @@ The feature you will run could be find into the `controllers/modules/component-a
 You can change `mainTag` and `componentName` with other value when you call the function and also set your component into a `controllers/modules` parameter different. See this example with `tag`, `name` and `placeholders`:
 
 ```js
-variations = require('./modules/component-atlas').includeComponents(variations, NA, "placeholders", "tag", "name");
+locals = require('./modules/component-atlas').includeComponents(locals, NA, "placeholders", "tag", "name");
 ```
 
 
