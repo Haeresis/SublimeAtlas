@@ -1,6 +1,6 @@
 {
   "name": "component-atlas",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "author": "Bruno Lesieur <bruno.lesieur@gmail.com>",
   "description": "Exemple d'injection dynamique de Composants avec NodeAtlas.",
   "private": false,
@@ -15,7 +15,9 @@
   "bugs": {
     "url": "https://github.com/Haeresis/ComponentAtlas/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "node-atlas": "^2.0.7"
+  },
   "engines": {
     "node": ">=0.10.10"
   },

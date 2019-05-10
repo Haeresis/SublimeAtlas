@@ -4,13 +4,6 @@
 	"less": true,
 	"controller": "common.js",
 	"variation": "common.json",
-	"optimizations": {
-		"images": {
-			"media/images/*.{gif,jpg,png,svg}": "media/images/",
-			"media/images/en-gb/*.{gif,jpg,png,svg}": "media/images/en-gb/",
-			"media/images/it-it/*.{gif,jpg,png,svg}": "media/images/it-it/"
-		}
-	},
 	"routes": {
 		"/home.html": {
 			"view": "standard.htm",
