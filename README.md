@@ -22,7 +22,7 @@ ComponentAtlas permet la construction de site ou maquette HTML par empilement de
 
 5. L'arborescence complète d'injection des composants est gérée en temps réel via les fichiers de variations.
 
-6. Complètement compatible avec [EditAtlas](https://github.com/Haeresis/EditAtlas/) pour éditer à chaud l'arborescence des composants et modifier en temps réel la structure même d'une page web.
+6. Complètement compatible avec [EditAtlas](https://github.com/MachinisteWeb/EditAtlas/) pour éditer à chaud l'arborescence des composants et modifier en temps réel la structure même d'une page web.
 
 Vous pouvez télécharger ce repository en vu de le tester ou de l'intégrer à l'un de vos projets [NodeAtlas](https://node-atlas.js.org/) ou node.js.
 
@@ -55,7 +55,7 @@ On arrive rapidement à la conclusion qu'il serait agréable :
 <? } ?>
 ```
 
-On aimerait même pouvoir inclure des composants dans des composants et rendre ça compatible avec [EditAtlas](https://github.com/Haeresis/EditAtlas/) ! C'est ce que fait ComponentAtlas.
+On aimerait même pouvoir inclure des composants dans des composants et rendre ça compatible avec [EditAtlas](https://github.com/MachinisteWeb/EditAtlas/) ! C'est ce que fait ComponentAtlas.
 
 
 ### Inclure des Composants dans un Template ###
@@ -661,11 +661,11 @@ variations = require('./modules/component-atlas').includeComponents(variations, 
 
 ## Utilisation avec EditAtlas ##
 
-Grâce à l'objet `path` en complément de l'objet `component` accessible depuis chaque composant, vous pouvez savoir dans quelle lot de variations de composants les variables courantes sont. Cela vous permet de les retrouver dans vos fichiers `common` ou `specific` par leur chemin absolue ce qui va être parfait pour utiliser [EditAtlas](https://github.com/Haeresis/EditAtlas/).
+Grâce à l'objet `path` en complément de l'objet `component` accessible depuis chaque composant, vous pouvez savoir dans quelle lot de variations de composants les variables courantes sont. Cela vous permet de les retrouver dans vos fichiers `common` ou `specific` par leur chemin absolue ce qui va être parfait pour utiliser [EditAtlas](https://github.com/MachinisteWeb/EditAtlas/).
 
 Il suffit de passer `path` comme c'est le cas de `component` lors de l'inclusion de composant dans des composants : `<?- includeComponents('componentsPlaceholder', component, path) ?>` (depuis un template, il n'y a rien à changer).
 
-Vous trouverez des exemples d'utilisation sur le [repository de EditAtlas](https://github.com/Haeresis/EditAtlas/).
+Vous trouverez des exemples d'utilisation sur le [repository de EditAtlas](https://github.com/MachinisteWeb/EditAtlas/).
 
 
 
@@ -717,7 +717,7 @@ ComponentAtlas allow us to manage a website or HTML assets with nested Component
 
 5. The full tree of injected component are manage in real time via variation files.
 
-6. Full compatibility with [EditAtlas](https://github.com/Haeresis/EditAtlas/) for edit in real time the components tree for modify the structure of page.
+6. Full compatibility with [EditAtlas](https://github.com/MachinisteWeb/EditAtlas/) for edit in real time the components tree for modify the structure of page.
 
 You can download this repository to test it or integrate it with any of your [NodeAtlas](https://node-atlas.js.org/) on node.js projects.
 
@@ -750,7 +750,7 @@ We concluded quickly it will be cool :
 <? } ?>
 ```
 
-It's a good idea also to allow us to include component into component and use this mechanism with [EditAtlas](https://github.com/Haeresis/EditAtlas/) ! It's the job of ComponentAtlas.
+It's a good idea also to allow us to include component into component and use this mechanism with [EditAtlas](https://github.com/MachinisteWeb/EditAtlas/) ! It's the job of ComponentAtlas.
 
 
 ### Include Components into a Template ###
@@ -1357,11 +1357,11 @@ locals = require('./modules/component-atlas').includeComponents(locals, NA, "pla
 
 ## Using with EditAtlas ##
 
-With `path` object in addition of `component` deliver into an HTML component, you can know what set of variations component are currently in use from `specific` or `common` file. This is useful for [EditAtlas](https://github.com/Haeresis/EditAtlas/).
+With `path` object in addition of `component` deliver into an HTML component, you can know what set of variations component are currently in use from `specific` or `common` file. This is useful for [EditAtlas](https://github.com/MachinisteWeb/EditAtlas/).
 
 Just pass the `path` in same way of `component` when you include a component into a component: `<?- includeComponents('componentsPlaceholder', component, path) ?>` (from a template, not set that).
 
-You find utilisation example on the [EditAtlas repository](https://github.com/Haeresis/EditAtlas/).
+You find utilisation example on the [EditAtlas repository](https://github.com/MachinisteWeb/EditAtlas/).
 
 
 
